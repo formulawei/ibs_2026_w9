@@ -1,0 +1,1568 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>IBS W9 · Alliance Governance & R&D Co-Development ｜學生版</title>
+<style>
+:root{
+  --ntu:#002B5C; --ntu2:#01356F; --gold:#C9A227;
+  --paper:#F4F7FC; --ink:#0B1220; --muted:#475569;
+  --muted2:#64748B; --line:#D7DEE9; --card:#FFFFFF;
+  --shadow:0 10px 30px rgba(2,6,23,.10);
+  --radius:16px; --radius2:20px;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --s0:#065F46; --t1:#4C1D95; --t2:#0F766E; --c1:#B45309; --s1:#1E3A5F; --ai:#991B1B;
+  --green:#15803D; --sub:#94A3B8; --surface:#FBFCFE;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;margin:0;}
+body{font-family:var(--sans);font-size:16px;color:var(--ink);
+  background:radial-gradient(1200px 600px at 8% 0%,rgba(0,43,92,.07),transparent 55%),
+             radial-gradient(900px 500px at 96% 4%,rgba(201,162,39,.10),transparent 55%),
+             var(--paper);}
+.topbar{display:flex;align-items:center;justify-content:space-between;
+  padding:13px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;
+  background:rgba(244,247,252,.94);backdrop-filter:blur(10px);z-index:20;}
+.brand{display:flex;gap:12px;align-items:center;min-width:0;}
+.logo{width:50px;height:50px;display:grid;place-items:center;border-radius:14px;
+  background:linear-gradient(135deg,var(--ntu),var(--ntu2));color:#fff;
+  font-weight:900;letter-spacing:.08em;box-shadow:0 8px 22px rgba(0,43,92,.28);font-size:13px;}
+.brandText{min-width:0;}
+.course{font-size:11px;color:var(--muted);letter-spacing:.03em;}
+.topic{font-size:15px;font-weight:900;color:var(--ntu);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;
+  font-weight:700;cursor:pointer;transition:.12s ease;font-size:13px;color:var(--ink);}
+.btn:hover{border-color:rgba(0,43,92,.35);box-shadow:0 6px 16px rgba(0,0,0,.08);}
+.btn.gold{border-color:rgba(201,162,39,.45);background:rgba(201,162,39,.12);color:#5A4600;}
+.btn.primary{background:var(--ntu);color:#fff;border-color:var(--ntu);}
+.btn.primary:hover{background:var(--ntu2);}
+.btn.ai-btn{background:var(--ai);color:#fff;border-color:var(--ai);font-size:13px;}
+.btn.ai-btn:hover{background:#7f1d1d;}
+.layout{display:grid;grid-template-columns:288px 1fr;gap:18px;padding:18px;max-width:1480px;margin:0 auto;}
+.sidebar{position:sticky;top:86px;align-self:start;border:1px solid var(--line);border-radius:var(--radius2);
+  background:rgba(255,255,255,.78);backdrop-filter:blur(8px);box-shadow:var(--shadow);padding:14px;
+  max-height:calc(100vh - 104px);overflow-y:auto;}
+.navTitle{font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;padding:0 4px;}
+.navItem{width:100%;text-align:left;padding:9px 11px;border-radius:11px;border:1px solid transparent;
+  background:transparent;cursor:pointer;font-weight:700;font-size:13px;color:var(--ntu2);display:block;
+  transition:.1s ease;margin-bottom:2px;line-height:1.35;}
+.navItem:hover{background:rgba(0,43,92,.06);}
+.navItem.active{background:rgba(0,43,92,.10);border-color:rgba(0,43,92,.18);}
+.navItem.seg-s0.active{background:rgba(6,95,70,.10);border-color:rgba(6,95,70,.25);color:var(--s0);}
+.navItem.seg-t1.active{background:rgba(76,29,149,.10);border-color:rgba(76,29,149,.25);color:var(--t1);}
+.navItem.seg-t2.active{background:rgba(15,118,110,.10);border-color:rgba(15,118,110,.25);color:var(--t2);}
+.navItem.seg-c1.active{background:rgba(180,83,9,.10);border-color:rgba(180,83,9,.25);color:var(--c1);}
+.navItem.seg-s1.active{background:rgba(30,58,95,.10);border-color:rgba(30,58,95,.25);color:var(--s1);}
+.navFooter{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);}
+.hint{font-size:11px;color:var(--muted);line-height:1.5;}
+.kbd{font-family:var(--mono);font-weight:900;padding:2px 6px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--muted);font-size:10px;}
+.content{border:1px solid var(--line);border-radius:var(--radius2);background:rgba(255,255,255,.88);
+  backdrop-filter:blur(8px);box-shadow:var(--shadow);padding:24px;min-height:calc(100vh - 160px);}
+.sectionHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:20px;}
+.h1{font-size:27px;font-weight:900;color:var(--ntu);margin:0;line-height:1.18;}
+.sub{margin:6px 0 0;color:var(--muted);line-height:1.5;font-size:15px;}
+.tag{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(0,43,92,.25);
+  background:rgba(0,43,92,.08);color:var(--ntu);padding:8px 14px;border-radius:999px;font-weight:800;white-space:nowrap;font-size:13px;}
+.timeTracker{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
+.timePill{font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted);}
+.timePill.s0{background:var(--s0);color:#fff;border-color:var(--s0);}
+.timePill.t1{background:var(--t1);color:#fff;border-color:var(--t1);}
+.timePill.t2{background:var(--t2);color:#fff;border-color:var(--t2);}
+.timePill.c1{background:var(--c1);color:#fff;border-color:var(--c1);}
+.timePill.s1{background:var(--s1);color:#fff;border-color:var(--s1);}
+.timePill.cur{opacity:1!important;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.card{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.06);}
+.cardTitle{font-weight:900;color:var(--ntu);margin:0 0 10px;font-size:15px;}
+.p{margin:0;color:var(--ink);line-height:1.65;font-size:15px;}
+.ul{margin:8px 0 0 20px;color:var(--ink);line-height:1.65;font-size:15px;}
+.ul li{margin-bottom:5px;}
+.sm{font-size:13px;color:var(--muted);}
+hr.sep{border:0;border-top:1px solid var(--line);margin:14px 0;}
+.callout{border-left:5px solid var(--ntu);padding:12px 14px;background:rgba(0,43,92,.05);border-radius:12px;margin:10px 0;line-height:1.6;}
+.callout.gold{border-color:var(--gold);background:rgba(201,162,39,.08);}
+.callout.green{border-color:#15803d;background:rgba(21,128,61,.06);}
+.callout.purple{border-color:#7C3AED;background:rgba(124,58,237,.06);}
+.callout.red{border-color:#DC2626;background:rgba(220,38,38,.05);}
+.callout.teal{border-color:#0E7490;background:rgba(14,116,144,.06);}
+.callout.teacher{border-color:#D97706;background:rgba(217,119,6,.07);border-style:dashed;}
+.callout strong{color:var(--ntu);}
+.callout.gold strong{color:#7C5500;}
+.callout.green strong{color:#14532D;}
+.callout.purple strong{color:#5B21B6;}
+.callout.red strong{color:#991B1B;}
+.callout.teal strong{color:#164E63;}
+.callout.teacher strong{color:#92400E;}
+.pillRow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
+.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 11px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;color:var(--ink);}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.dot.b{background:var(--ntu);} .dot.g{background:#15803d;} .dot.p{background:#7C3AED;} .dot.r{background:#DC2626;} .dot.t{background:#0E7490;}
+.qBox{border:1.5px dashed rgba(0,43,92,.28);background:rgba(0,43,92,.03);border-radius:14px;padding:14px;}
+.qTitle{font-weight:900;margin:0 0 10px;color:var(--ntu);font-size:15px;}
+.options{display:grid;gap:8px;}
+.opt{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;cursor:pointer;font-weight:700;text-align:left;transition:.1s ease;font-size:14px;color:var(--ink);}
+.opt:hover{border-color:rgba(0,43,92,.35);box-shadow:0 6px 16px rgba(0,0,0,.07);}
+.opt.chosen{border-color:rgba(0,43,92,.50);background:rgba(0,43,92,.06);}
+.opt.correct{border-color:#15803d;background:rgba(21,128,61,.09);color:#14532d;}
+.opt.wrong{border-color:#DC2626;background:rgba(220,38,38,.07);color:#7f1d1d;}
+.opt[disabled]{cursor:default;}
+.barWrap{display:flex;align-items:center;gap:8px;margin-top:8px;}
+.bar{height:11px;border-radius:999px;background:rgba(0,0,0,.06);overflow:hidden;flex:1;border:1px solid var(--line);}
+.fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--ntu));transition:width .4s ease;}
+.smallVote{color:var(--muted);font-size:12px;font-family:var(--mono);}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.5;}
+.tbl th{background:rgba(0,43,92,.06);color:var(--ntu);font-weight:800;font-size:12.5px;letter-spacing:.02em;}
+.tbl tbody tr:nth-child(even){background:rgba(244,247,252,.55);}
+.tbl tbody tr:hover{background:rgba(201,162,39,.06);}
+.revealBox{display:none;}
+.revealBox.visible{display:block;animation:fadeSlide .3s ease;}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+/* AI Exercise */
+.aiBox{border:2px solid rgba(153,27,27,.3);background:rgba(153,27,27,.03);border-radius:16px;padding:16px;margin:14px 0;}
+.aiBoxTitle{font-weight:900;color:var(--ai);font-size:14px;margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+.aiOutput{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;min-height:80px;font-size:14px;line-height:1.7;color:var(--ink);margin:10px 0;white-space:pre-wrap;}
+.aiOutput.loading{color:var(--muted);font-style:italic;}
+.critiqueInput{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;font-family:var(--sans);resize:vertical;min-height:80px;color:var(--ink);}
+.critiqueInput:focus{outline:none;border-color:rgba(0,43,92,.4);}
+/* AI workflow + copy-prompt UI */
+.workflowSteps{background:rgba(15,118,110,.06);border-left:3px solid var(--t2);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13px;line-height:1.7;}
+.workflowSteps strong{color:var(--t2);}
+.aiBox-link{display:inline-block;background:#fff;border:1px solid #D1D5DB;border-radius:6px;padding:3px 10px;margin:3px 4px 3px 0;font-size:12px;text-decoration:none;color:var(--ink);font-weight:600;}
+.aiBox-link:hover{background:#F3F4F6;border-color:var(--t2);color:var(--t2);}
+.promptBox{background:#1F2937;color:#F9FAFB;border-radius:10px;padding:12px 14px;margin:10px 0;}
+.promptBox .promptHeader{font-size:12px;color:#9CA3AF;font-weight:700;margin:0 0 8px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.promptBox pre{margin:0;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.6;color:#F9FAFB;max-height:280px;overflow-y:auto;}
+.copy-btn{background:#10B981;color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;}
+.copy-btn:hover{background:#059669;}
+.copy-btn.copied{background:#3B82F6;}
+.responseInput{width:100%;border:1.5px solid #94A3B8;border-radius:12px;padding:10px 12px;font-size:13px;font-family:var(--sans);resize:vertical;min-height:90px;background:#F8FAFC;color:var(--ink);}
+.responseInput:focus{outline:none;border-color:var(--t2);background:#fff;}
+/* Debate box */
+.debateGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+.debateCard{border:1px solid var(--line);border-radius:14px;padding:14px;}
+.debateCard.a{border-left:4px solid var(--t1);}
+.debateCard.b{border-left:4px solid var(--t2);}
+.debateLabel{font-weight:900;font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;}
+.debateCard.a .debateLabel{color:var(--t1);}
+.debateCard.b .debateLabel{color:var(--t2);}
+/* Governance diagram */
+.govBar{background:linear-gradient(90deg,#E0F2FE,#DDD6FE,#FEE2E2);border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;font-weight:800;font-size:13px;margin:10px 0;}
+.govItem{text-align:center;flex:1;}
+.govArrow{color:var(--muted);font-size:18px;}
+/* Teacher badge */
+.teacherBadge{display:inline-block;background:#D97706;color:#fff;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:800;letter-spacing:.04em;margin-left:8px;}
+/* word counter */
+.wc{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;margin-top:4px;}
+/* responsive */
+@media(max-width:880px){.layout{grid-template-columns:1fr;}.sidebar{position:static;max-height:none;}.grid2,.grid3{grid-template-columns:1fr;}.debateGrid{grid-template-columns:1fr;}}
+/* Toast */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--ntu);color:#fff;padding:10px 20px;border-radius:999px;font-weight:700;font-size:14px;transition:.3s ease;z-index:100;pointer-events:none;opacity:0;}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="logo">NTU<br>IBS</div>
+    <div class="brandText">
+      <div class="course">IBS 2026 · International Business Strategy</div>
+      <div class="topic">W9 · 聯盟治理 × R&D 共同開發</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn" id="btnLang">EN / 中</button>
+    <button class="btn" id="btnReset">↺ Reset</button>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="navTitle">W9 Segments</div>
+    <button class="navItem seg-s0" data-view="s0">🎬 S0 · 開場：劇情 + 核心問題 · 8 min</button>
+    <button class="navItem seg-t1" data-view="t1">🏛️ T1 · Reuer 2024：聯盟治理機制 · 20 min <span style="font-size:9px;color:var(--gold);">🤖</span></button>
+    <button class="navItem seg-t2" data-view="t2">⚡ T2 · Zahoor 2023：AMC × 共同創新 · 15 min <span style="font-size:9px;color:var(--gold);">🤖</span></button>
+    <button class="navItem seg-c1" data-view="c1">🚜 C1 · 案例整合：佃製作所的抉擇 · 12 min <span style="font-size:9px;color:var(--gold);">🤖</span></button>
+    <button class="navItem seg-s1" data-view="s1">📝 S1 · 策略備忘錄 · 5 min</button>
+    <div class="navFooter">
+      <div class="hint">⬅ ➡ 切換段落<br/><span class="kbd">L</span> 語言 <span class="kbd">R</span> 重置<br/><br/>🤖 = AI 互動批判練習</div>
+    </div>
+  </nav>
+  <main class="content" id="content"></main>
+</div>
+<div id="toast"></div>
+
+<script>
+const STORE = "ibs_w9_2026_student";
+const IS_TEACHER = false;
+const VIEW_ORDER = ["s0","t1","t2","c1","s1"];
+const DEF = {lang:"zh",presenter:false,view:"s0",polls:{},quizDone:{},reveals:{},game:{},gameRevealed:false};
+let ST = load();
+const content = document.getElementById("content");
+const toast = document.getElementById("toast");
+function load(){try{const s=localStorage.getItem(STORE);return s?{...DEF,...JSON.parse(s)}:{...DEF};}catch(e){return{...DEF};}}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(ST));}catch(e){}}
+function showToast(m){toast.textContent=m;toast.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>toast.classList.remove("show"),2200);}
+function countWords(text){if(!text||!text.trim())return 0;const s=text.trim();const cjk=(s.match(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g)||[]).length;const latin=s.replace(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g," ").trim();const lw=latin?latin.split(/\s+/).filter(Boolean).length:0;return cjk+lw;}
+
+function getPoll(k){return ST.polls[k]||{a:0,b:0,c:0,d:0,choice:null};}
+function vote(k,ch){const p=getPoll(k);if(p.choice)p[p.choice]=Math.max(0,(p[p.choice]||0)-1);p.choice=ch;p[ch]=(p[ch]||0)+1;ST.polls[k]=p;save();}
+function tot(p){return(p.a||0)+(p.b||0)+(p.c||0)+(p.d||0);}
+function pct(p,k){const t=tot(p);return t?Math.round((p[k]||0)/t*100):0;}
+
+function pollCard({key,title,title_en,opts,followup,followup_en}){
+  const p=getPoll(key);const t=tot(p);const zh=ST.lang==="zh";
+  return `<div class="qBox">
+    <p class="qTitle">📊 ${zh?title:title_en}</p>
+    <div class="options">
+      ${opts.map(([k,lz,le])=>`<button class="opt${p.choice===k?' chosen':''}" data-poll="${key}" data-opt="${k}">${k.toUpperCase()}. ${zh?lz:le}</button>`).join("")}
+    </div>
+    ${t>0?`<div style="margin-top:10px;display:grid;gap:4px;">
+      ${opts.map(([k,lz,le])=>`<div style="display:flex;align-items:center;gap:6px;">
+        <span style="width:30px;font-weight:900;font-family:var(--mono);font-size:12px;">${pct(p,k)}%</span>
+        <div class="bar"><div class="fill" style="width:${pct(p,k)}%"></div></div>
+        <span style="font-size:12px;color:var(--muted)">${k.toUpperCase()}. ${zh?lz:le}</span>
+      </div>`).join("")}
+      <div class="barWrap"><span class="smallVote">${t} 票</span></div>
+    </div>`:""} 
+    ${(zh?followup:followup_en)?`<hr class="sep"/><p class="sm" style="font-weight:800;">💬 討論追問</p><ul class="ul" style="font-size:13px;margin-top:0;color:var(--muted);">${(zh?followup:followup_en).map(q=>`<li>${q}</li>`).join("")}</ul>`:""}
+  </div>`;
+}
+
+function quizCard({key,q,q_en,opts,ans,exp,exp_en}){
+  const zh=ST.lang==="zh";const done=ST.quizDone[key];
+  return `<div class="qBox">
+    <p class="qTitle">🧠 ${zh?q:q_en}</p>
+    <div class="options">
+      ${opts.map(([lz,le],i)=>`<button class="opt${done===i+1?(i===ans?' correct':' wrong'):''}" data-quiz="${key}" data-idx="${i}" ${done?'disabled':''}>${String.fromCharCode(65+i)}. ${zh?lz:le}</button>`).join("")}
+    </div>
+    ${done?`<div class="callout ${done-1===ans?'green':'red'}" style="margin-top:10px;">
+      <p class="p" style="font-size:13px;">${done-1===ans?"✅":"❌"} ${zh?exp:exp_en}</p>
+    </div>`:""}
+  </div>`;
+}
+
+function timeTags(cur){
+  const segs=[["s0","🎬 S0","8min"],["t1","🏛️ T1 Reuer","20min"],["t2","⚡ T2 Zahoor","15min"],["c1","🚜 C1 案例","12min"],["s1","📝 S1 Memo","5min"]];
+  return `<div class="timeTracker">${segs.map(([k,l,t])=>`<span class="timePill ${k} ${k===cur?'cur':''}" style="${k===cur?'':'opacity:.5'}">${l} ${t}</span>`).join("")}</div>`;
+}
+
+function revealBtn(id,label="💡 教師提示"){
+  return `<button class="btn gold" style="font-size:12px;padding:6px 12px;" onclick="toggleReveal('${id}')">${label}</button>`;
+}
+function revealSection(id,html){
+  const shown=ST.reveals[id];
+  return `<div id="${id}Rev" class="revealBox callout teacher${shown?' visible':''}" style="margin-top:10px;">
+    <p style="font-size:11px;font-weight:900;color:#92400E;margin:0 0 6px;">📋 TEACHER NOTE ${IS_TEACHER?'':'(隱藏)'}</p>
+    ${html}
+  </div>`;
+}
+function toggleReveal(id){
+  const el=document.getElementById(id+"Rev");
+  ST.reveals[id]=!ST.reveals[id];
+  el.classList.toggle("visible",ST.reveals[id]);
+  save();
+}
+
+// ═══ AI exercise helpers ═══
+// Copy prompt text to clipboard with visual feedback on the button
+function copyPromptText(elementId, btn){
+  const el=document.getElementById(elementId);
+  if(!el) return;
+  const text=el.textContent;
+  const finishOk=()=>{
+    if(!btn) return;
+    const orig=btn.innerHTML;
+    btn.innerHTML="✓ "+(ST.lang==="zh"?"已複製！":"Copied!");
+    btn.classList.add("copied");
+    setTimeout(()=>{btn.innerHTML=orig;btn.classList.remove("copied");},2000);
+  };
+  const fallback=()=>{
+    // Fallback for older browsers / non-https contexts
+    const ta=document.createElement("textarea");
+    ta.value=text;ta.style.position="fixed";ta.style.left="-9999px";
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand("copy");finishOk();}
+    catch(e){alert((ST.lang==="zh"?"複製失敗，請手動選取文字。":"Copy failed, please select text manually.")+"\n"+e.message);}
+    document.body.removeChild(ta);
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(finishOk).catch(fallback);
+  }else{
+    fallback();
+  }
+}
+
+// ═══ VIEW FUNCTIONS ═══
+
+function viewS0(){
+  const zh=ST.lang==="zh";
+  return `
+  <div class="sectionHead">
+    <div>
+      <h1 class="h1">${zh?"🎬 S0｜開場：下町火箭 S2 Ep6-7 × 聯盟治理抉擇":"🎬 S0 | Opening: Shitamachi Rocket S2 Ep6-7 × Alliance Governance"}</h1>
+      <p class="sub">${zh?"劇情快速回顧 · 核心策略問題 · 本週學習路線圖":"Plot recap · Core strategic question · Week 9 roadmap"}</p>
+    </div>
+    <div class="tag">8 min</div>
+  </div>
+  ${timeTags("s0")}
+
+  <div class="card" style="border-left:4px solid var(--s0);margin-bottom:14px;">
+    <p class="cardTitle">📺 ${zh?"下町火箭 S2 Ep6-7 劇情回顧（八咫烏 Yatagarasu 編開幕）":"Shitamachi Rocket S2 Ep6-7 Recap (Opening of the Yatagarasu Arc)"}</p>
+    <p class="p" style="font-size:13.5px;margin-bottom:10px;line-height:1.7;">${zh?
+    "<strong>前情提要（S2 第 1-5 集，Ghost 編）</strong>：佃製作所（Tsukuda Manufacturing，原為帝國重工大型火箭引擎的閥門系統 valve system 長期供應商）因經理部長殿村直弘（Tonomura Naohiro）家中老舊拖拉機作業不均的問題而受到啟發，開始進入農業變速箱（transmission）市場。佃航平社長（Tsukuda Kohei）與新創企業 Gear Ghost（齒輪幽靈）建立合作 ── Gear Ghost 由前帝國重工工程師伊丹大（Itami Daichi，社長）和島津裕（Shimazu Yū，副社長兼首席工程師）創立，採類似 Apple 的設計外包（fabless）模式，並承接農機具大廠 Yamatani 的變速箱訂單。佃製作所協助 Gear Ghost 打贏與 Keymar Tech 的專利侵權訴訟，原計畫投資 15 億日元組成深度業務聯盟（business alliance），雙方建立深厚信任。":
+    "<strong>Background (S2 Eps 1-5, the &quot;Ghost Arc&quot;)</strong>: Tsukuda Manufacturing — Teikoku Heavy Industries' long-term supplier of valve systems for large rocket engines — was inspired by Accounting Director Tonomura Naohiro's family tractor's uneven tilling to enter the agricultural transmission market. CEO Tsukuda Kohei built a partnership with the startup Gear Ghost ── founded by ex-Teikoku engineers Itami Daichi (CEO) and Shimazu Yū (VP and Chief Engineer), operating on an Apple-like fabless design model with a transmission contract from agricultural-machinery giant Yamatani. Tsukuda helped Gear Ghost win a patent infringement lawsuit against Keymar Tech, and was planning to invest ¥1.5 billion as part of a deep business alliance — a relationship of strong mutual trust."}</p>
+
+    <div style="display:grid;gap:10px;">
+      <div style="border:1px solid var(--line);border-radius:10px;padding:11px;background:rgba(76,29,149,.04);border-left:3px solid var(--t1);">
+        <p style="font-weight:900;color:var(--t1);margin:0 0 5px;font-size:13.5px;">🔻 ${zh?"Ep 6：Gear Ghost 的背叛 + 帝國重工的新邀約":"Ep 6: Gear Ghost's Betrayal + Teikoku's New Offer"}</p>
+        <p class="p" style="font-size:13px;line-height:1.7;">${zh?
+        "島津裕急赴佃製作所，告知社長伊丹大已私下與小型引擎廠 Daedalus（社長重田登志行 Shigeta Toshiyuki）達成「資本合作／資本聯盟」（capital alliance），即將脫離與佃製作所的合作。佃航平趕赴 Gear Ghost 質問，伊丹冷酷宣告：<em>「與你們已無法共存」</em>。原來伊丹真實動機是對帝國重工執行董事的場俊一（Matoba Shun'ichi）的個人復仇 ── 的場曾將伊丹和島津「冷凍」至總務部，迫使他們出走創業。Gear Ghost 與 Yamatani 的訂單也隨之取消，佃製作所頓失變速箱業務。島津抗議伊丹的決定，宣布退出 Gear Ghost。<br/><br/>同時，帝國重工財前道生（Saizen Michio）部長從火箭事業轉任「宇宙航空企畫推進組」，向佃航平提出全新合作邀約：「無人農業機器人（Unmanned Agricultural Robot）」計畫，運用甫成功發射的「八咫烏（Yatagarasu）」準天頂衛星定位系統（可達公分級定位精度），開發自動駕駛拖拉機。財前並請佃航平協助說服其大學摯友、北海道農業大學的野木博文教授（Noki Hirobumi，無人農業機器人領域權威）參與計畫。":
+        "Shimazu rushes to Tsukuda with shocking news: CEO Itami has secretly formed a &quot;capital alliance&quot; with the small engine maker Daedalus (CEO Shigeta Toshiyuki), abandoning the partnership with Tsukuda. Tsukuda Kohei confronts Itami, who coldly declares: <em>&quot;We can no longer survive together with you.&quot;</em> Itami's true motive is personal vengeance against Teikoku's executive director Matoba Shun'ichi, who had once &quot;frozen out&quot; Itami and Shimazu by reassigning them to General Affairs — forcing their departure to found Gear Ghost. The Yamatani transmission order is also canceled, leaving Tsukuda with no transmission business. Shimazu, opposing Itami's move, resigns from Gear Ghost.<br/><br/>Simultaneously, Teikoku's Saizen Michio — newly transferred from rockets to the Aerospace Project Promotion Group — brings Tsukuda a new opportunity: an &quot;Unmanned Agricultural Robot&quot; project leveraging the freshly launched &quot;Yatagarasu&quot; quasi-zenith satellite positioning system (centimeter-level positioning accuracy). Saizen asks Tsukuda to help persuade his university friend, Hokkaido Agricultural University's Professor Noki Hirobumi — a leading expert on unmanned farming robots — to join the project."}</p>
+      </div>
+
+      <div style="border:1px solid var(--line);border-radius:10px;padding:11px;background:rgba(180,83,9,.04);border-left:3px solid var(--c1);">
+        <p style="font-weight:900;color:var(--c1);margin:0 0 5px;font-size:13.5px;">🔻 ${zh?"Ep 7：帝國重工的二度反覆 + Daedalus 聯軍的高調出擊":"Ep 7: Teikoku's Second Reversal + The Daedalus Coalition Strikes"}</p>
+        <p class="p" style="font-size:13px;line-height:1.7;">${zh?
+        "副社長之爭白熱化，的場俊一推翻財前的計畫，下令零組件全面「內製化」（vertical integration），將佃製作所排除於無人農業機器人計畫外。財前夾於兩造之間，向佃航平致歉，但仍請他繼續說服野木教授配合帝國重工。佃航平起初憤怒拒絕，但在與已決定返鄉繼承稻農家業的殿村通話後，為日本農業未來咬牙繼續說服野木。<br/><br/>同時，重田登志行透過「北堀計畫」（Kitabori Plan，北堀哲哉 Kitabori Tetsuya 策畫）召開大型記者會，宣布中小企業聯軍「下町拖拉機（Shitamachi Tractor）」開發計畫，命名為「Darwin」，與帝國重工的「Alpha 1」對標，搶走訂單與媒體聲量。佃製作所決定：繼續開發變速箱技術，並與野木教授共同發展自家的無人拖拉機。":
+        "With the Vice-CEO succession battle heating up, Matoba Shun'ichi overrides Saizen's plan and orders all components internalized (vertical integration), ejecting Tsukuda from the agricultural robot project. Saizen, caught between sides, apologizes to Tsukuda but still asks him to continue persuading Professor Noki to cooperate with Teikoku. Tsukuda is initially furious, but after speaking with Tonomura — who has decided to return home to inherit his family's rice farm — he agrees, for the future of Japanese agriculture.<br/><br/>Meanwhile, Shigeta Toshiyuki, working with the Kitabori Plan (planned by Kitabori Tetsuya), holds a high-profile press conference unveiling an SME-coalition &quot;Shitamachi Tractor&quot; project called &quot;Darwin,&quot; positioned against Teikoku's &quot;Alpha 1,&quot; capturing orders and media attention. Tsukuda decides: continue developing transmission technology in-house, and partner with Professor Noki to develop their own unmanned tractor."}</p>
+      </div>
+
+      <div style="border:1px solid var(--line);border-radius:10px;padding:10px;background:rgba(153,27,27,.04);border-left:3px solid var(--ai);">
+        <p style="font-weight:900;color:var(--ai);margin:0 0 4px;font-size:13px;">⚔️ ${zh?"Ep 7 末尾的三方鼎立":"Three-way standoff at Ep 7's close"}</p>
+        <p class="p" style="font-size:12.5px;line-height:1.65;">${zh?
+        "(1) 帝國重工自製「Alpha 1」 vs Daedalus + Gear Ghost 中小企業聯軍「Darwin」<br/>(2) 佃製作所 + 野木研究室（自主路線）夾於兩大陣營之間<br/>(3) 佃製作所同時面對 Gear Ghost 的背叛（事後創傷）與帝國重工的反覆（事前不確定性）":
+        "(1) Teikoku's in-house &quot;Alpha 1&quot; vs the Daedalus + Gear Ghost SME coalition's &quot;Darwin&quot;<br/>(2) Tsukuda + Noki Lab (independent path) caught between the two camps<br/>(3) Tsukuda simultaneously processes Gear Ghost's betrayal (retrospective trauma) and Teikoku's reversal (prospective uncertainty)"}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-bottom:14px;">
+    <div class="card">
+      <p class="cardTitle">🎯 ${zh?"核心策略問題（Strategy Memo）":"Core Strategic Question (Strategy Memo)"}</p>
+      <div class="callout gold">
+        <p class="p" style="font-size:13.5px;font-weight:700;line-height:1.7;">${zh?
+        "如果你是佃航平（Tsukuda Kohei），在這個多方背叛、競合糾葛的戰局中：<br/>(1) <strong>事後檢討</strong>：與 Gear Ghost 的合作為何在僅靠口頭協議與非正式信任的情況下崩潰？什麼樣的治理機制原本可以預防這場災難？<br/>(2) <strong>事前佈局</strong>：面對帝國重工這個既是長年大客戶、又是農業機器人市場競爭者的「競合（coopetition）」夥伴，什麼樣的交易結構或治理安排能在保護核心智慧財產權（intellectual property, IP）的同時，仍開放共同研發的可能？<br/>(3) <strong>替代路徑</strong>：是否該繞開兩個大企業，自主與野木研究室合作，並聯合中小企業形成自己的「下町聯軍」？":
+        "As Tsukuda Kohei, navigating multiple betrayals and coopetition tangles:<br/>(1) <strong>Retrospective</strong>: Why did the Gear Ghost partnership collapse — relying only on oral agreements and informal trust? What governance mechanisms might have prevented this disaster?<br/>(2) <strong>Prospective</strong>: Facing Teikoku — both a long-term major customer and now a competitor in the agricultural-robot market — what deal structure or governance arrangement protects core intellectual property (IP) while keeping co-development possible?<br/>(3) <strong>Alternative</strong>: Should Tsukuda bypass both giants, partner with Professor Noki's lab, and forge its own SME coalition?"}</p>
+      </div>
+    </div>
+    <div class="card">
+      <p class="cardTitle">📚 ${zh?"本週雙核心閱讀":"Week 9 Core Readings"}</p>
+      <div class="pillRow">
+        <span class="pill" style="border-color:rgba(76,29,149,.3);background:rgba(76,29,149,.05);color:var(--t1);">Reuer (2024) · ${zh?"組織間關係治理":"Governance of Inter-Organizational Relationships"}</span>
+        <span class="pill" style="border-color:rgba(15,118,110,.3);background:rgba(15,118,110,.05);color:var(--t2);">Zahoor et al. (2023) · ${zh?"聯盟管理能力 × 共同創新":"Alliance Management Capability × Co-Innovation"}</span>
+      </div>
+      <p class="sm" style="margin-top:8px;line-height:1.6;">${zh?"兩篇文章互補：Reuer 回答「如何設計治理結構（the structure question）」，Zahoor 回答「什麼能力驅動共創速度（the capability question）」。前者解釋為何 Gear Ghost 合作會崩潰，後者解釋為何即使設計好治理結構，仍需要動態能力才能加速合作。":"Complementary readings: Reuer answers \"how to design governance (the structure question)\"; Zahoor answers \"what capabilities drive co-innovation speed (the capability question)\". The former explains why the Gear Ghost partnership collapsed; the latter explains why — even with good governance — dynamic capabilities are still needed to accelerate collaboration."}</p>
+      <hr class="sep"/>
+      <p class="sm" style="font-weight:800;">🗝️ ${zh?"關鍵縮寫（first-time terms）":"Key Acronyms (first-time terms)"}</p>
+      <p class="sm" style="line-height:1.6;font-size:12px;">${zh?
+      "本週將反覆使用以下縮寫：<strong>IORs</strong>（Inter-Organizational Relationships，組織間關係）／<strong>TCE</strong>（Transaction Cost Economics，交易成本經濟學）／<strong>JSC</strong>（Joint Steering Committee，聯合指導委員會）／<strong>AMC</strong>（Alliance Management Capability，聯盟管理能力）／<strong>CIA</strong>（Co-Innovation Ambidexterity，共同創新雙元性）／<strong>RBV</strong>（Resource-Based View，資源基礎觀）／<strong>SMEs</strong>（Small and Medium Enterprises，中小企業）。":
+      "Recurring acronyms this week: <strong>IORs</strong> (Inter-Organizational Relationships) / <strong>TCE</strong> (Transaction Cost Economics) / <strong>JSC</strong> (Joint Steering Committee) / <strong>AMC</strong> (Alliance Management Capability) / <strong>CIA</strong> (Co-Innovation Ambidexterity) / <strong>RBV</strong> (Resource-Based View) / <strong>SMEs</strong> (Small and Medium Enterprises)."}</p>
+    </div>
+  </div>
+
+  ${pollCard({key:"s0_partner",title:"你的直覺：佃製作所應該選哪個夥伴？",title_en:"Your instinct: Which partner should Tsukuda choose?",opts:[["a","Gear Ghost — 技術對齊，風險可控","Gear Ghost — tech alignment, manageable risk"],["b","帝國重工 — 市場資源，即使有競合","Teikoku — market reach, despite coopetition"],["c","兩者都要，雙軌並行","Both partners, dual-track"],["d","哪個都不選，尋找其他夥伴","Neither — find a different partner"]],followup:["選 A 的人：你擔心哪種 IP 風險最大？","選 B 的人：你怎麼防止 Teikoku 的吸收風險？","選 C 的人：同時管理兩個聯盟的成本是什麼？"],followup_en:["Team A: What specific IP risk concerns you most?","Team B: How do you prevent Teikoku from absorbing Tsukuda's tech?","Team C: What's the cost of managing two alliances simultaneously?"]})}
+
+  ${IS_TEACHER?revealBtn("s0note","📋 教師引導：S0 引課步驟（先問再展開）"):""}
+  ${IS_TEACHER?revealSection("s0note",`
+    <p style="font-weight:900;font-size:13px;margin-bottom:8px;">建議的引導順序（先問同學，得到答案後再展開）：</p>
+    <ol style="font-size:13px;padding-left:18px;line-height:1.8;">
+      <li><strong>先讓學生直覺投票</strong>，不解釋理論，只問：「你會怎麼做？」——這個直覺後來會被理論推翻或驗證，先記在心裡。</li>
+      <li>追問選 A 的同學：「Gear Ghost 真的『風險可控』嗎？什麼樣的風險你會想先確認？」</li>
+      <li>追問選 B 的同學：「帝國重工是『大客戶』還是『未來競爭者』？這個身分模糊本身就是 Reuer 要處理的問題。」</li>
+      <li>關鍵引導問題：「為什麼 Tsukuda 不乾脆找律師寫份保密協定（NDA）就好？」——引出治理結構的複雜性，超越單一合約。</li>
+      <li>強調：Ep6-7 的核心衝突不是「誰好誰壞」，而是 <strong>治理結構選擇本身就是策略</strong>。今天會讀兩篇互補的文章——Reuer 回答「結構」問題，Zahoor 回答「能力」問題。</li>
+    </ol>
+  `):""}
+
+  <div class="callout" style="margin-top:14px;">
+    <p class="p"><strong>${zh?"🗺️ 本週路線圖":"🗺️ Week Roadmap"}</strong></p>
+    <div class="tbl" style="margin-top:8px;font-size:13px;">
+      <table class="tbl"><thead><tr><th>段落</th><th>核心問題</th><th>理論工具</th><th>時間</th></tr></thead>
+      <tbody>
+        <tr><td>T1</td><td>聯盟治理有哪些「機制」？</td><td>Reuer (2024) · Williamson TCE</td><td>20 min</td></tr>
+        <tr><td>T2</td><td>什麼能力讓聯盟加速共創？</td><td>Zahoor et al. (2023) · AMC · CIA</td><td>15 min</td></tr>
+        <tr><td>C1</td><td>佃製作所應該怎麼選？</td><td>兩框架整合分析</td><td>12 min</td></tr>
+        <tr><td>S1</td><td>Memo：你的建議是？</td><td>4層結構撰寫</td><td>5 min</td></tr>
+      </tbody></table>
+    </div>
+  </div>`;
+}
+
+function viewT1(){
+  const zh=ST.lang==="zh";
+  return `
+  <div class="sectionHead">
+    <div>
+      <h1 class="h1">${zh?"🏛️ T1｜Reuer (2024)：重新審視組織間關係（Inter-Organizational Relationships, IORs）的治理機制":"🏛️ T1 | Reuer (2024): Revisiting Governance of Inter-Organizational Relationships (IORs)"}</h1>
+      <p class="sub">${zh?"Williamson 交易成本經濟學（Transaction Cost Economics, TCE）框架 · 三大治理機制 · 量身訂製（Bespoke）治理":"Williamson's Transaction Cost Economics (TCE) · Three governance mechanisms · Bespoke governance design"}</p>
+    </div>
+    <div class="tag">20 min</div>
+  </div>
+  ${timeTags("t1")}
+
+  <!-- ══ TRANSITION FROM S0 ══ -->
+  <div class="callout teal" style="margin-bottom:14px;">
+    <p class="p" style="font-size:13.5px;"><strong>🔗 ${zh?"從直覺到理論：":"From intuition to theory:"}</strong> ${zh?
+    "剛才大家憑直覺選了夥伴。但「選誰」只是表象，真正的策略問題是「<strong>用什麼結構去合作</strong>」。Tsukuda 與 Gear Ghost 已經有「合作意願 + 互信」，但沒有可執行的結構——這正是 Reuer (2024) 要解決的問題。讓我們先看一個具體場景，再讀理論。":
+    "You just picked partners on intuition. But 'who to pick' is the surface; the real strategic question is 'what structure to collaborate through'. Tsukuda and Gear Ghost already had intent + mutual trust — but no enforceable structure. That's exactly what Reuer (2024) tackles. Let's look at a concrete scenario first, then read the theory."}</p>
+  </div>
+
+  <!-- ══ T1 PUZZLE — vivid concrete scenario before theory ══ -->
+  <div class="card" style="border:2px solid var(--ai);background:rgba(153,27,27,.04);margin-bottom:14px;">
+    <p class="cardTitle" style="color:var(--ai);font-size:15px;">🧩 ${zh?"先想想這個情境（Puzzle Before Theory）":"First, Think About This Scenario (Puzzle Before Theory)"}</p>
+    <div style="background:#fff;border-left:4px solid var(--ai);padding:12px 14px;border-radius:8px;font-size:13.5px;line-height:1.7;">
+      <p style="margin:0 0 8px;"><strong>${zh?"場景：":"Scenario:"}</strong> ${zh?
+      "佃航平與 Gear Ghost 創辦人伊丹大、副社長島津裕在居酒屋達成「合作意向」：「我們把變速箱訂單一起接下來，互相支援，不分彼此。」雙方握手，沒有書面合約，沒有股權交換，僅靠人與人之間的信任。三個月後，伊丹悄悄與 Daedalus 簽下資本聯盟，整個合作崩潰。":
+      "Tsukuda Kohei meets Gear Ghost's founders Itami and Shimazu at an izakaya and agrees: 'We'll take on the transmission orders together — supporting each other, no boundaries.' They shake hands. No written contract, no equity exchange, just personal trust. Three months later, Itami quietly signs a capital alliance with Daedalus and the partnership collapses."}</p>
+      <p style="margin:0;color:var(--ai);font-weight:700;">❓ ${zh?
+      "請判斷以下三個說法，哪個最危險？（先憑直覺，理論等下會告訴你誰是對的）":
+      "Judge the three claims below — which is most dangerous? (Use intuition first; the theory below will tell you who's right.)"}</p>
+      <ol style="margin:8px 0 0 0;padding-left:20px;font-size:13px;">
+        <li>${zh?"「Tsukuda 應該做股權聯盟（equity alliance），這樣才能保護 IP。」":"\"Tsukuda should sign an equity alliance to protect IP.\""}</li>
+        <li>${zh?"「Tsukuda 應該做非股權合約（non-equity contract），把細節寫清楚就夠了。」":"\"Tsukuda should sign a non-equity contract — detailed clauses are enough.\""}</li>
+        <li>${zh?"「治理結構不重要，重點是找對人——Itami 個人不可信。」":"\"Governance doesn't matter; pick the right person — Itami was untrustworthy.\""}</li>
+      </ol>
+    </div>
+  </div>
+
+  ${IS_TEACHER?revealBtn("t1puzzle","📋 教師引導：先問再展開（puzzle 帶課步驟）"):""}
+  ${IS_TEACHER?revealSection("t1puzzle",`
+    <p style="font-weight:900;font-size:13px;margin-bottom:6px;">引導順序：</p>
+    <ol style="font-size:13px;padding-left:18px;line-height:1.8;">
+      <li>先讓 2-3 位同學各自選一個說法並說明為什麼。<strong>不要評斷對錯</strong>。</li>
+      <li>追問：「如果『找對人』就夠了，為什麼世界上的合作還是會崩潰？」——破除「人對了就好」的迷思。</li>
+      <li>引導：說法 1（股權聯盟才能保護 IP）和說法 2（非股權合約細點就夠）<strong>都是錯的</strong>，但錯的方式不同——這正是 Reuer 的貢獻所在。</li>
+      <li>接下來進入 Reuer 的核心論點：治理是可以「量身訂製（bespoke）」的，不必選股權 vs. 非股權的二元。</li>
+    </ol>
+    <p style="font-size:13px;margin-top:8px;"><strong>學生最常的誤解</strong>：把治理當作「選結構」（form），而非「設計機制組合」（mechanisms）。Reuer 的突破就是把後者變成可操作的工具。</p>
+  `):""}
+
+  <!-- ══ Section 2: Concept — what theory says about the puzzle ══ -->
+  <div class="callout red" style="margin-top:16px;margin-bottom:14px;border-left:5px solid var(--ai);">
+    <p class="p" style="font-weight:900;font-size:14px;margin-bottom:8px;color:var(--ai);">${zh?"🧠 本節讀完後，你要能回答的三個「危險識別」問題":"🧠 Three 'danger-spotting' questions you should be able to answer after this section"}</p>
+    <p class="p" style="font-size:13.5px;margin:0;">${zh?
+    "① <strong>顧問或 AI 在說什麼時是在『誤用』理論？</strong>（例：「股權聯盟才能保護智慧財產權（IP）」——錯在哪？）<br/>② <strong>當有人說『按交易成本經濟學（TCE）設計治理』時，他可能漏掉哪個關鍵維度？</strong>（提示：競合脈絡 / 行政控制）<br/>③ <strong>哪一種說法在實務上更危險？</strong>（例：「聯合指導委員會（JSC）只在股權聯盟有用」 vs. 「合約條款細就夠了」——哪個更會誤導決策者？）":
+    "① <strong>When is a consultant or AI 'misapplying' a theory?</strong> (e.g., &ldquo;only equity alliances protect IP&rdquo; — what's wrong?)<br/>② <strong>When someone says 'design governance per Transaction Cost Economics (TCE),' which key dimension are they likely missing?</strong> (hint: competitive context / admin controls)<br/>③ <strong>Which claim is more dangerous in practice?</strong> (e.g., &ldquo;Joint Steering Committees (JSCs) only work in equity alliances&rdquo; vs. &ldquo;detailed contracts are enough&rdquo; — which misleads decision-makers more?)"}</p>
+  </div>
+
+  <div class="callout" style="margin-bottom:16px;">
+    <p class="p"><strong>${zh?"閱讀核心論點：":"Core Argument:"}</strong> ${zh?
+    "Reuer (2024) 在 Williamson (1991) 的基礎上重新審視聯盟治理。關鍵洞見：企業可以「<strong>量身訂製</strong>（mix and match）」各種治理機制，而不必選擇某種固定的組織形式（股權 vs. 非股權）。非股權聯盟也可以建立強大的行政控制機制（如聯合指導委員會 JSC）。<br/><br/>👉 <em>回到上方的三個說法</em>：說法 1 錯在以為「股權＝保護」；說法 2 錯在以為「合約細＝夠了」；說法 3 錯在把結構問題化約為個人問題。Reuer 的答案是：拆解三大機制，依需要組合。":
+    "Reuer (2024) revisits alliance governance building on Williamson (1991). Key insight: firms can '<strong>bespoke</strong>' (mix and match) governance mechanisms rather than choosing a discrete organizational form (equity vs. non-equity). Non-equity alliances can also embed strong administrative controls (e.g., Joint Steering Committees, JSCs).<br/><br/>👉 <em>Back to the three claims above</em>: Claim 1 is wrong because 'equity ≠ automatic protection'; Claim 2 is wrong because 'detailed clauses ≠ enough'; Claim 3 is wrong because it reduces a structural problem to a personality problem. Reuer's answer: decompose into three mechanisms, then combine as needed."}</p>
+  </div>
+
+  <p class="cardTitle">⚖️ ${zh?"Williamson 的治理連續體（Governance Continuum）":"Williamson's Governance Continuum"}</p>
+  <div class="govBar" style="margin-bottom:16px;">
+    <div class="govItem" style="color:#0E7490;font-size:12px;">🌐 Markets<br/><span style="font-weight:400;font-size:11px;">純市場交易</span></div>
+    <div class="govArrow">→</div>
+    <div class="govItem" style="color:#7C3AED;font-size:12px;">📄 Unilateral<br/><span style="font-weight:400;font-size:11px;">單邊非股權</span></div>
+    <div class="govArrow">→</div>
+    <div class="govItem" style="color:#7C3AED;font-size:12px;">🤝 Bilateral<br/><span style="font-weight:400;font-size:11px;">雙邊非股權</span></div>
+    <div class="govArrow">→</div>
+    <div class="govItem" style="color:#B45309;font-size:12px;">💼 Equity JV<br/><span style="font-weight:400;font-size:11px;">股權聯盟</span></div>
+    <div class="govArrow">→</div>
+    <div class="govItem" style="color:#991B1B;font-size:12px;">🏢 Hierarchies<br/><span style="font-weight:400;font-size:11px;">垂直整合</span></div>
+  </div>
+
+  <div class="grid3" style="margin-bottom:16px;">
+    <div class="card" style="border-top:3px solid var(--t1);">
+      <p class="cardTitle" style="color:var(--t1);">💰 ${zh?"1. 激勵機制":"1. Incentives"}</p>
+      <p class="p" style="font-size:12.5px;margin-bottom:6px;">${zh?"股權對齊 / 相互人質 / 利益分配":"Equity alignment / mutual hostages / payoff design"}</p>
+      <p class="p" style="font-size:12px;color:var(--ai);font-weight:700;margin:0;">${zh?"⚠️ 危險訊號：「只看股權比例就能判斷激勵強度」——忽略了相互人質與私利／共利的張力。":"⚠️ Danger sign: \"equity share alone determines incentive strength\" — ignores mutual hostages and private-vs-common benefits tension."}</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--t2);">
+      <p class="cardTitle" style="color:var(--t2);">🗂️ ${zh?"2. 行政控制":"2. Admin Controls"}</p>
+      <p class="p" style="font-size:12.5px;margin-bottom:6px;">${zh?"聯合指導委員會（Joint Steering Committee, JSC）、決策權配置、僵局解除":"Joint Steering Committee (JSC) / authority delegation / deadlock resolution"}</p>
+      <p class="p" style="font-size:12px;color:var(--ai);font-weight:700;margin:0;">${zh?"⚠️ 危險訊號：「JSC 只屬於股權聯盟」——這是文獻最普遍的誤解，非股權聯盟也能設置 JSC。":"⚠️ Danger sign: \"JSCs belong only to equity alliances\" — the most common misreading; non-equity alliances can embed JSCs too."}</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--c1);">
+      <p class="cardTitle" style="color:var(--c1);">⚖️ ${zh?"3. 法律機制":"3. Legal Institutions"}</p>
+      <p class="p" style="font-size:12.5px;margin-bottom:6px;">${zh?"按爭端類型量身設計：IP→訴訟、執行爭端→調解":"Tailored by dispute type: IP→lawsuit, performance→mediation"}</p>
+      <p class="p" style="font-size:12px;color:var(--ai);font-weight:700;margin:0;">${zh?"⚠️ 危險訊號：「仲裁是聯盟的最佳爭端解決工具」——現代仲裁已趨近訴訟，且應依爭端類型分流。":"⚠️ Danger sign: \"arbitration is the best dispute mechanism for alliances\" — modern arbitration is closer to litigation; route by dispute type."}</p>
+    </div>
+  </div>
+
+  <!-- T1 critical-thinking prompt before AI exercise -->
+  <div class="callout" style="margin-bottom:16px;background:rgba(76,29,149,.04);border-left:4px solid var(--t1);">
+    <p class="p" style="font-size:13px;margin:0;"><strong>${zh?"🎯 練習：找錯題":"🎯 Practice: spot the error"}</strong> ${zh?"以下兩個說法，哪一個在實務上<strong>更危險</strong>？為什麼？<br/>(A) 「Tsukuda 不應與 Gear Ghost 簽非股權聯盟，因為非股權無法控制 IP。」<br/>(B) 「Tsukuda 應與 Gear Ghost 簽非股權聯盟，因為條款細的合約就夠了。」<br/><em>提示：兩個都錯，但錯的方式不一樣——一個忽視了 JSC 的可能性，另一個忽視了競合脈絡與行政控制機制。</em>":
+    "Which claim is <strong>more dangerous</strong> in practice — and why?<br/>(A) \"Tsukuda shouldn't sign a non-equity alliance with Gear Ghost — non-equity can't protect IP.\"<br/>(B) \"Tsukuda should sign a non-equity alliance with Gear Ghost — detailed contract clauses are enough.\"<br/><em>Hint: both are wrong, but in different ways — one ignores the possibility of JSC; the other ignores competitive context and admin controls.</em>"}</p>
+  </div>
+
+  <div class="callout gold" style="margin-bottom:16px;">
+    <p class="p"><strong>🔑 Reuer 的最關鍵突破：</strong> 企業可以量身訂製（bespoke）治理安排，從三個維度「混搭」機制，而非被迫選擇固定的組織形式。這挑戰了「治理連續體」的既定思維。</p>
+  </div>
+
+  <div class="callout red" style="margin-bottom:16px;">
+    <p class="p"><strong>⚠️ 被遺漏的變數（Omitted Variable Bias）：</strong> 大多數實證研究只關注合作脈絡（cooperative context），<strong>忽視了競合脈絡（competitive context）</strong>。當合作夥伴同時是競爭者（如佃 × 帝國重工），激勵機制的設計邏輯完全不同。</p>
+  </div>
+
+  <hr class="sep"/>
+  <!-- ══ ALLIANCE GOVERNANCE CHOICE GAME — replacing AI critique #1 ══ -->
+  <div class="aiBox" id="govGameBox">
+    <p class="aiBoxTitle">🎮 ${zh?"聯盟治理選擇遊戲｜為 OpenAI × Microsoft（2019）設計治理結構":"Alliance Governance Choice Game｜Design the OpenAI × Microsoft 2019 Deal"}</p>
+    <p class="sm" style="margin-bottom:10px;line-height:1.7;">${zh?
+    "<strong>遊戲設定</strong>：時間是 2019 年 7 月，你同時擔任 OpenAI 與 Microsoft 的治理顧問。Microsoft 即將投入 $1B（最終會累積到 $13B）。OpenAI 是非營利，急需運算資源。你必須<strong>從 Reuer 的三大機制各做一個關鍵選擇</strong>，再用 AI 細化你的設計，最後揭曉現實的對照——看看你的設計是更好、更糟、還是與 OpenAI/Microsoft 在 2023 年付出昂貴代價之後才學到的教訓相同。":
+    "<strong>Setup</strong>: It's July 2019. You advise both OpenAI and Microsoft on the deal. Microsoft is about to invest $1B (eventually $13B). OpenAI is a nonprofit desperate for compute. You must <strong>make one key choice from each of Reuer's three mechanisms</strong>, refine the design with AI, then reveal reality — and see whether your design is better, worse, or the same as what OpenAI/Microsoft learned the hard way in 2023."}</p>
+
+    <div class="callout" style="background:rgba(0,43,92,.04);border-left:4px solid var(--ntu);margin:12px 0;">
+      <p class="p" style="font-size:13px;line-height:1.7;">${zh?
+      "<strong>📊 2019 年的關鍵約束（決策前必看）</strong><br/>" +
+      "• Microsoft：要求<em>獨家</em>雲端權與最先進模型授權；願意投入 $1B+；不希望被 AGI 條款拒之門外。<br/>" +
+      "• OpenAI：堅守『AGI 應廣益人類』使命；非營利董事會控制；不願成為 Microsoft 的子公司。<br/>" +
+      "• 競爭環境：Google DeepMind 已被 Alphabet 收購（=完全整合）；Anthropic 還未獨立（將以 PBC 模式選擇）。<br/>" +
+      "• 不確定性：AGI 是否可達成？何時可達成？沒有人知道。":
+      "<strong>📊 2019 Binding Constraints (read before deciding)</strong><br/>" +
+      "• Microsoft: demands <em>exclusive</em> cloud rights and frontier-model licensing; willing to commit $1B+; does not want to be locked out by an AGI clause.<br/>" +
+      "• OpenAI: committed to its mission of 'AGI benefiting all humanity'; nonprofit board control; refuses to become a Microsoft subsidiary.<br/>" +
+      "• Competitive landscape: Google DeepMind already acquired by Alphabet (= full integration); Anthropic not yet independent (will choose PBC).<br/>" +
+      "• Uncertainty: Is AGI achievable? When? Nobody knows."}</p>
+    </div>
+
+    <!-- Decision 1: Incentive Mechanism (governance form) -->
+    <div class="card" style="border-left:4px solid var(--t1);margin:12px 0;">
+      <p style="font-weight:900;color:var(--t1);font-size:14px;margin:0 0 8px;">🎯 ${zh?"決策 1｜Reuer 的『激勵機制』：選哪種治理形式？":"Decision 1｜Reuer's 'Incentives': Which governance form?"}</p>
+      <div class="options">
+        <button class="opt" data-game="d1" data-val="a">${zh?"A. 直接收購（Microsoft 全資買下 OpenAI，類似 Alphabet × DeepMind）":"A. Direct acquisition (Microsoft fully buys OpenAI, like Alphabet × DeepMind)"}</button>
+        <button class="opt" data-game="d1" data-val="b">${zh?"B. 資本上限合夥（capped-profit LP）+ 獨家授權（= 2019 年實際選擇）":"B. Capped-profit LP + exclusive license (= the actual 2019 choice)"}</button>
+        <button class="opt" data-game="d1" data-val="c">${zh?"C. 量身訂製：非股權聯盟 + 明確 IP 邊界 + 階段式股權（達到里程碑才轉換）":"C. Bespoke: non-equity alliance + explicit IP boundaries + milestone-based equity conversion"}</button>
+      </div>
+    </div>
+
+    <!-- Decision 2: Admin Controls (board / JSC) -->
+    <div class="card" style="border-left:4px solid var(--t2);margin:12px 0;">
+      <p style="font-weight:900;color:var(--t2);font-size:14px;margin:0 0 8px;">🗂️ ${zh?"決策 2｜Reuer 的『行政控制』：Microsoft 在 OpenAI 治理中的角色？":"Decision 2｜Reuer's 'Admin Controls': Microsoft's role in OpenAI governance?"}</p>
+      <div class="options">
+        <button class="opt" data-game="d2" data-val="a">${zh?"A. 無正式席位、無 JSC（= 2019 年實際選擇——導致 2023 年 Microsoft 在解雇前一分鐘才知道）":"A. No formal seat, no JSC (= actual 2019 — Microsoft notified one minute before Altman firing in 2023)"}</button>
+        <button class="opt" data-game="d2" data-val="b">${zh?"B. 一席無投票權的『觀察員』+ 雙公司 JSC（每月開會、處理技術與商業爭議）":"B. One non-voting observer seat + bilateral JSC (monthly, for tech & commercial disputes)"}</button>
+        <button class="opt" data-game="d2" data-val="c">${zh?"C. 多數投票席位（會違反 OpenAI 的非營利使命，但治理透明）":"C. Voting majority (would violate OpenAI's nonprofit mission, but transparent governance)"}</button>
+      </div>
+    </div>
+
+    <!-- Decision 3: Legal/Dispute (AGI clause + dispute resolution) -->
+    <div class="card" style="border-left:4px solid var(--c1);margin:12px 0;">
+      <p style="font-weight:900;color:var(--c1);font-size:14px;margin:0 0 8px;">⚖️ ${zh?"決策 3｜Reuer 的『法律機制』：AGI 條款與爭端解決如何設計？":"Decision 3｜Reuer's 'Legal Institutions': AGI clause & dispute resolution?"}</p>
+      <div class="options">
+        <button class="opt" data-game="d3" data-val="a">${zh?"A. AGI 由 OpenAI 董事會單方判定 + 純訴訟解決爭端（= 2019 年實際選擇——成為 2023 年最大爭點）":"A. AGI decided unilaterally by OpenAI board + litigation only (= actual 2019; became the central 2023 friction)"}</button>
+        <button class="opt" data-game="d3" data-val="b">${zh?"B. AGI 用『外部仲裁人 + 營收可量化測試』雙重認定 + 分層爭端解決（JSC → 仲裁 → 訴訟）":"B. AGI = external arbiter + quantifiable revenue test + tiered dispute resolution (JSC → arbitration → litigation)"}</button>
+        <button class="opt" data-game="d3" data-val="c">${zh?"C. 完全不設 AGI 條款（簡潔但 Microsoft 會拒簽——因為若 AGI 達成，他可能被排除在外）":"C. Drop the AGI clause entirely (simple but Microsoft will reject — risks being locked out if AGI is achieved)"}</button>
+      </div>
+    </div>
+
+    <!-- Live status: choices summary -->
+    <div id="gameChoiceStatus" style="font-size:13px;color:var(--muted);margin:8px 0;font-family:var(--mono);"></div>
+
+    <!-- Step 2: AI prompt generation (only after all 3 decisions made) -->
+    <div id="gameAIBlock" style="display:none;margin-top:12px;">
+      <hr class="sep"/>
+      <p class="sm" style="margin-bottom:10px;font-weight:700;">${zh?"📌 你已完成三項決策。現在讓 AI 用 Reuer + Keller 框架評估你的設計，並產出具體合約條款建議。":"📌 You've made all three decisions. Now let AI use Reuer + Keller frameworks to evaluate your design and propose concrete contract terms."}</p>
+
+      <div class="workflowSteps">
+        <strong>📌 ${zh?"操作流程":"Workflow"}</strong><br/>
+        ${zh?"① 點下方「複製提示詞」 → ② 貼到 AI 工具並送出 → ③ 把 AI 的設計建議貼回下方 → ④ 點『揭曉現實對照』看實際發生了什麼":"① Click 'Copy Prompt' → ② Paste into AI → ③ Paste AI's design back → ④ Click 'Reveal Reality' to see what actually happened"}<br/>
+        <strong>${zh?"推薦平台":"Recommended"}：</strong>
+        <a class="aiBox-link" href="https://claude.ai" target="_blank" rel="noopener">Claude.ai</a>
+        <a class="aiBox-link" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a>
+        <a class="aiBox-link" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a>
+      </div>
+
+      <div class="promptBox">
+        <div class="promptHeader">
+          <span>📋 ${zh?"複製這段提示詞給 AI（已包含你的 3 項選擇）":"Copy this prompt to AI (includes your 3 choices)"}</span>
+          <button class="copy-btn" onclick="copyPromptText('gamePrompt', this)">📋 ${zh?"複製":"Copy"}</button>
+        </div>
+        <pre id="gamePrompt"></pre>
+      </div>
+
+      <div style="margin-top:12px;">
+        <p class="sm" style="font-weight:800;margin-bottom:6px;">📥 ${zh?"貼上 AI 給你的設計建議：":"Paste AI's design recommendations:"}</p>
+        <textarea id="gameAIResponse" class="responseInput" placeholder="${zh?'把 AI 給你的具體合約條款與機制設計貼到這裡...':'Paste AI&apos;s concrete contract terms and mechanism designs here...'}" oninput="updateWC('gameAIResponse','gameAIResponseWC')"></textarea>
+        <div id="gameAIResponseWC" class="wc">0 字</div>
+      </div>
+
+      <button class="btn primary" id="revealRealityBtn" style="margin-top:10px;font-weight:800;">${zh?"🎬 揭曉現實對照（May 2026）":"🎬 Reveal Reality (May 2026)"}</button>
+    </div>
+
+    <!-- Reality reveal block -->
+    <div id="realityRevealBlock" style="display:none;margin-top:14px;">
+      <hr class="sep"/>
+      <div class="card" style="border:2px solid var(--ntu);background:linear-gradient(135deg,rgba(0,43,92,.05),rgba(201,162,39,.04));">
+        <p style="font-weight:900;color:var(--ntu);font-size:15px;margin:0 0 10px;">🎬 ${zh?"現實對照：OpenAI × Microsoft 2019 → 2026/5/5":"Reality Check: OpenAI × Microsoft 2019 → 2026/5/5"}</p>
+
+        <div style="overflow-x:auto;">
+          <table class="tbl" style="font-size:12.5px;">
+            <thead><tr>
+              <th style="width:18%;">${zh?"決策":"Decision"}</th>
+              <th>${zh?"2019 實際選擇 → 後果":"Actual 2019 Choice → Consequence"}</th>
+              <th>${zh?"2026 修補後的版本":"2026 Patched Version"}</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>${zh?"D1 激勵":"D1 Incentives"}</strong></td>
+                <td>${zh?"資本上限合夥（capped-profit LP）+ 獨家授權。Microsoft 投入 $13B 但只有經濟權益，沒有控制權。":"Capped-profit LP + exclusive license. Microsoft put in $13B but had only economic interests, no control."}</td>
+                <td>${zh?"<strong>2025/10 → PBC 重組</strong>。Microsoft 取得 ~27% 股權（最新 $852B 估值下值 ~$228B，17.6× 回報）。<strong>2026/4/27 → 取消雲端獨家、IP 變非獨家</strong>。":"<strong>2025/10 → PBC restructuring</strong>. Microsoft gets ~27% equity (~$228B at $852B valuation, 17.6× return). <strong>2026/4/27 → Azure exclusivity dropped, IP non-exclusive</strong>."}</td>
+              </tr>
+              <tr style="background:rgba(153,27,27,.06);">
+                <td><strong>${zh?"D2 行政":"D2 Admin"}</strong></td>
+                <td>${zh?"<strong style='color:var(--ai)'>無 JSC、無正式席位</strong>。2023/11 Altman 被解雇，Microsoft 在新聞稿前 1 分鐘才被通知（Keller P2a + P4a 同時觸發）。":"<strong style='color:var(--ai)'>No JSC, no formal seat</strong>. In Nov 2023, Altman was fired; Microsoft notified one minute before press release (Keller P2a + P4a both triggered)."}</td>
+                <td>${zh?"危機後 OpenAI 給 Microsoft 一席<strong>無投票權觀察員</strong>。新 PBC 結構下，Microsoft 27% 股權自帶治理權重。":"Post-crisis, OpenAI gave Microsoft a <strong>non-voting observer seat</strong>. Under the new PBC, Microsoft's 27% equity carries governance weight."}</td>
+              </tr>
+              <tr>
+                <td><strong>${zh?"D3 法律":"D3 Legal"}</strong></td>
+                <td>${zh?"AGI 由 OpenAI 董事會單方判定 + 純訴訟。2025-2026 年雙方都在法律上互相施壓——OpenAI 威脅啟動 AGI 條款，Microsoft 威脅堅守原合約。":"AGI judged unilaterally by OpenAI board + litigation only. In 2025–2026, both sides leveraged this legally — OpenAI threatened to invoke the AGI clause, Microsoft threatened to enforce the original contract."}</td>
+                <td>${zh?"<strong>2026/4/27 → AGI 條款被『簡化掉』</strong>。Microsoft 取得 IP 授權延長至 2032 年（非獨家）。營收分成設總額上限。":"<strong>2026/4/27 → AGI clause was 'simplified out'</strong>. Microsoft's IP license extended to 2032 (non-exclusive). Revenue share now capped."}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout gold" style="margin-top:12px;">
+          <p class="p" style="font-size:13px;"><strong>🏆 ${zh?"你的得分：":"Your Score:"}</strong> <span id="gameScoreText" style="font-weight:900;font-size:14px;color:var(--ntu);"></span></p>
+          <p class="p" style="font-size:13px;margin-top:8px;"><strong>${zh?"判讀標準：":"Scoring Logic:"}</strong> ${zh?
+          "我們把 <strong>Reuer 框架最對齊</strong>的選項標記為 1 分（每題的 C/B/B 為強對齊）。歷史告訴我們：選 A 系列等於走 OpenAI 的 2019 路線，事後得花 $13B 才能修補；選強對齊版本則大致等於 2026 年大家終於學到的版本。":
+          "We score the <strong>Reuer-aligned</strong> options 1 point each (D1=C, D2=B, D3=B). History shows: choosing the A-series mirrors the 2019 path that took $13B to patch; choosing the strong-aligned versions roughly matches what everyone finally learned by 2026."}</p>
+          <p class="p" style="font-size:13px;margin-top:8px;"><strong>📌 ${zh?"反思問題（請寫下答案）：":"Reflection (write your answer):"}</strong></p>
+          <textarea id="gameReflect" class="critiqueInput" rows="4" placeholder="${zh?'(1) 你哪一題與現實偏離最遠？為什麼？\n(2) 你的設計如果在 2019 年實施，2023 年的危機會不會發生？\n(3) Tsukuda × Gear Ghost 該套用你的版本還是 2026 年的修補版？':'(1) Which decision diverged most from reality? Why?\n(2) Would your 2019 design have prevented the 2023 crisis?\n(3) Should Tsukuda × Gear Ghost adopt your design or the 2026 patched version?'}" oninput="updateWC('gameReflect','gameReflectWC')"></textarea>
+          <div id="gameReflectWC" class="wc">0 字</div>
+        </div>
+      </div>
+
+      ${IS_TEACHER?revealBtn("gameTeacher","📋 教師引導：遊戲收尾與最後指出"):""}
+      ${IS_TEACHER?revealSection("gameTeacher",`
+        <p style="font-weight:900;font-size:13px;margin-bottom:8px;">遊戲收尾教學要點：</p>
+        <ol style="font-size:13px;padding-left:18px;line-height:1.8;">
+          <li><strong>不要懲罰選 A 系列的學生</strong>。OpenAI 和 Microsoft 都是世界一流的組織，他們在 2019 年也選了 A 系列。重點是讓學生看到『直覺中正確』的選擇，事後可能很貴。</li>
+          <li><strong>關鍵問題</strong>：「Reuer 在 2019 年發表這篇論文了嗎？」答：沒有，Reuer (2024) 是<em>之後</em>才整理出來的。這正是學術研究的價值——把無數案例的痛苦教訓濃縮成可預先使用的框架。</li>
+          <li><strong>橋接到 Tsukuda</strong>：「Tsukuda 沒有 OpenAI 的議價空間（不能事後拿 $13B 重建治理）。所以 Tsukuda 必須<em>事前</em>就用 Reuer 框架把 D1+D2+D3 全部設計好。」</li>
+          <li><strong>強調 D2 的關鍵性</strong>：很多學生會聚焦在 D1（股權形式）。但歷史證明 D2（行政控制 / JSC）才是 2023 年危機的真正根源——Microsoft 沒有 JSC，所以連被通知都做不到。這完美驗證 Reuer 對 admin controls 被研究忽視的批評。</li>
+          <li><strong>下一步銜接 T2</strong>：「即使你選了完美的 D1+D2+D3，Microsoft 還是不能保證合作快、創新多。為什麼？因為治理結構是<em>條件</em>，能力才是<em>引擎</em>。下一節 Zahoor 教我們怎麼建造引擎。」</li>
+        </ol>
+      `):""}
+    </div>
+  </div>
+  <hr class="sep"/>
+  ${quizCard({key:"t1q1",q:"根據 Reuer (2024)，下列哪一個說法最正確？",q_en:"According to Reuer (2024), which statement is most accurate?",opts:[["股權聯盟是唯一能提供行政控制的組織形式","Equity alliances are the only form that can provide administrative controls"],["非股權聯盟可以透過 JSC 實施行政控制，即使沒有獨立實體","Non-equity alliances can implement admin controls via JSC, even without a separate entity"],["TCE 建議高資產專屬性時應選擇垂直整合而非聯盟","TCE recommends vertical integration over alliances when asset specificity is high"],["仲裁是所有聯盟的最佳爭端解決機制","Arbitration is the optimal dispute resolution for all alliances"]],ans:1,exp:"Reuer & Devarakonda (2016) 發現非股權聯盟可以透過合約中的 JSC 設計有效的行政控制，挑戰了傳統的連續體思維。",exp_en:"Reuer & Devarakonda (2016) found non-equity alliances can embed effective admin controls via contractual JSC, challenging the traditional continuum view."})}
+
+  ${quizCard({key:"t1q2",q:"Reuer (2024) 指出，治理研究最容易犯的「遺漏變數偏誤」是什麼？",q_en:"Reuer (2024) identifies the most common omitted variable bias in governance research as:",opts:[["只關注合作脈絡（cooperative context），忽視競合脈絡（competitive context）","Focusing only on the cooperative context, ignoring the competitive context of collaboration"],["使用橫斷面資料而非縱貫面資料","Using cross-sectional rather than longitudinal data"],["樣本偏向高科技產業，忽視傳統製造業","Sampling bias toward high-tech, ignoring traditional manufacturing"],["測量股權而非非股權形式","Measuring equity rather than non-equity forms"]],ans:0,exp:"Reuer 明確指出：研究往往只看合作的互信面，忽視夥伴同時也是競爭者的現實。對佃×帝國重工而言，競合脈絡完全改變激勵設計邏輯。",exp_en:"Reuer explicitly flags: research attends to cooperative context but not competitive context. For Tsukuda×Teikoku, the coopetition context fundamentally changes incentive design."})}
+
+  <hr class="sep"/>
+
+  <!-- ══ KELLER ET AL. 2021 EXTENSION ══ -->
+  <div class="card" style="border-left:5px solid var(--t2);margin-bottom:14px;">
+    <p class="cardTitle" style="color:var(--t2);">📐 ${zh?"擴展框架｜Keller et al. (2021)：治理機制 2×2 類型學與中斷動態":"Extension｜Keller et al. (2021): 2×2 Governance Typology & Disruption Dynamics"}</p>
+    <p class="p" style="font-size:14px;margin-bottom:12px;">${zh?
+    "Reuer 問「可以設計什麼機制」，Keller et al. (2021) 問「哪些機制在什麼情境下最有價值？」他們打破了文獻中的一個隱含假設：<strong>合約機制不一定是正式的，關係機制不一定是非正式的。</strong>":
+    "Reuer asks 'what mechanisms can be designed.' Keller et al. (2021) ask 'which mechanisms are most valuable under what conditions?' They break a hidden assumption in the literature: <strong>contractual mechanisms need not be formal; relational mechanisms need not be informal.</strong>"}</p>
+
+    <div style="overflow-x:auto;margin-bottom:12px;">
+      <table class="tbl">
+        <thead><tr>
+          <th style="width:20%;background:rgba(0,43,92,.08);">${zh?"執行方式 ↓ 編碼程度 →":"Enforcement ↓  Codification →"}</th>
+          <th style="border-top:3px solid var(--t1);background:rgba(76,29,149,.06);color:var(--t1);">${zh?"⚖️ 合約性（Contractual）第三方可強制執行":"⚖️ Contractual — Third-party enforceable"}</th>
+          <th style="border-top:3px solid var(--t2);background:rgba(15,118,110,.06);color:var(--t2);">${zh?"🤝 關係性（Relational）自我執行":"🤝 Relational — Self-enforcing"}</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:900;background:rgba(0,43,92,.04);">📄 ${zh?"<strong>正式</strong>（明文記載）":"<strong>Formal</strong> (codified)"}</td>
+            <td style="background:rgba(76,29,149,.03);">
+              <p style="font-size:13px;font-weight:900;color:var(--t1);margin:0 0 3px;">${zh?"正式合約機制":"Formal Contractual"}</p>
+              <p style="font-size:12px;margin:0;">${zh?"終止條款、稽核條款、訴訟保留":"Termination, audit, lawsuit clauses"}</p>
+              <p style="font-size:11px;color:var(--muted);margin:3px 0 0;font-style:italic;">✅ ${zh?"知識存庫、法律確定性":"Knowledge repository, legal certainty"}<br/>⚠️ ${zh?"成本高、可能傳遞負面信號":"High cost, may signal distrust"}</p>
+            </td>
+            <td style="background:rgba(15,118,110,.03);">
+              <p style="font-size:13px;font-weight:900;color:var(--t2);margin:0 0 3px;">${zh?"正式關係機制":"Formal Relational"}</p>
+              <p style="font-size:12px;margin:0;">${zh?"JSC、人員交換規則、會議程序":"JSC, personnel exchange rules, meeting procedures"}</p>
+              <p style="font-size:11px;color:var(--muted);margin:3px 0 0;font-style:italic;">✅ ${zh?"組織記憶、減少誤解":"Org memory, fewer misunderstandings"}<br/>⚠️ ${zh?"制定成本較高":"Setup cost"}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight:900;background:rgba(0,43,92,.04);">🤝 ${zh?"<strong>非正式</strong>（未明文記載）":"<strong>Informal</strong> (uncodified)"}</td>
+            <td style="background:rgba(76,29,149,.01);">
+              <p style="font-size:13px;font-weight:900;color:var(--t1);margin:0 0 3px;">${zh?"非正式合約機制":"Informal Contractual"}</p>
+              <p style="font-size:12px;margin:0;">${zh?"口頭保密安排、分工協議、決策規則":"Oral confidentiality, task division, decision rules"}</p>
+              <p style="font-size:11px;color:var(--muted);margin:3px 0 0;font-style:italic;">✅ ${zh?"靈活、低成本、傳遞信任信號":"Flexible, low cost, trust signal"}<br/>⚠️ ${zh?"人員異動後極脆弱":"Very fragile after personnel change"}</p>
+            </td>
+            <td style="background:rgba(15,118,110,.01);">
+              <p style="font-size:13px;font-weight:900;color:var(--t2);margin:0 0 3px;">${zh?"非正式關係機制":"Informal Relational"}</p>
+              <p style="font-size:12px;margin:0;">${zh?"信任、正向人際關係":"Trust, positive interpersonal relationships"}</p>
+              <p style="font-size:11px;color:var(--muted);margin:3px 0 0;font-style:italic;">✅ ${zh?"無負面信號、促進合作精神":"No negative signal, collaborative spirit"}<br/>⚠️ ${zh?"中斷後難以修復":"Hard to rebuild after disruption"}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout red" style="margin-bottom:0;">
+      <p class="p" style="font-size:13px;"><strong>⚡ ${zh?"Keller et al. 的動態命題（Propositions）：":"Keller et al.'s Dynamic Propositions:"}</strong><br/>
+      ${zh?"當聯盟發生「中斷（disruption）」（如夥伴內部重組、關鍵人員異動），治理機制的價值發生系統性位移：<br/>• <strong>非正式合約機制</strong>：高度有益 → 有害（P2a）——口頭協議因缺乏可驗證性而崩潰<br/>• <strong>正式合約機制</strong>：邊際有益 → 高度有益（P1a→P1b）——成為記憶存庫與法律基礎<br/>• <strong>正式關係機制</strong>（JSC）：有益 → 高度有益（P3a）——成為資訊交換與協調的骨架<br/>• <strong>非正式關係機制</strong>（信任）：高度有益 → 邊際有益（P4a）——人際連結隨人員異動而消散":
+      "When an alliance is disrupted (e.g., partner restructuring, key personnel change), governance mechanism value shifts systematically:<br/>• <strong>Informal contractual</strong>: highly beneficial → detrimental (P2a) — oral agreements collapse due to unverifiability<br/>• <strong>Formal contractual</strong>: marginally beneficial → highly beneficial (P1a→P1b) — becomes memory repository and legal anchor<br/>• <strong>Formal relational</strong> (JSC): beneficial → highly beneficial (P3a) — becomes coordination backbone<br/>• <strong>Informal relational</strong> (trust): highly beneficial → marginally beneficial (P4a) — interpersonal bonds dissolve with people"}</p>
+    </div>
+  </div>
+
+  <!-- ══ OPENAI × MICROSOFT CASE BRIDGE ══ -->
+  <div class="card" style="border-left:5px solid var(--gold);margin-bottom:14px;">
+    <p class="cardTitle" style="color:#7C5500;">🤖 ${zh?"案例橋接｜OpenAI × Microsoft：一場用十年寫成的治理教科書（2015–2026）":"Case Bridge｜OpenAI × Microsoft: A Decade-Long Governance Textbook (2015–2026)"}</p>
+    <div class="callout gold" style="margin:0 0 12px 0;">
+      <p class="p" style="font-size:13.5px;line-height:1.7;">${zh?
+      "<strong>為什麼用 OpenAI × Microsoft？</strong>沒有任何案例像這個聯盟一樣，把 Reuer 的「治理機制可量身訂製」與 Keller 的「中斷後機制價值位移」演繹得如此戲劇性。從 2015 年的非營利信任協議，到 2019 年的「資本上限合夥（capped-profit LP）+ 獨家合約」，到 2023 年的董事會解雇 Sam Altman 危機，再到 2025 年的 PBC 重組與 2026 年 4 月的合約大改寫——這個聯盟在十年間經歷了 Reuer 三大機制的所有組合，並且兩次經歷 Keller 式的「中斷」。<br/><br/>" +
+      "<strong>三個關鍵階段的治理設計：</strong>" +
+      "<br/>① <em>2019 年的初始設計</em>：OpenAI（非營利） 創立資本上限合夥（capped-profit LP），Microsoft 投資 $1B 並在後續累計達 $13B，獲得 Azure 獨家雲端權與「先進模型」獨家授權。最具創意的條款是 <strong>「AGI 條款」</strong>：若 OpenAI 達成 AGI（通用人工智慧），Microsoft 將失去對「post-AGI」技術的權利。<br/>" +
+      "② <em>2023 年 11 月的中斷</em>：OpenAI 非營利董事會突然解雇 Sam Altman，五天後因 745/770 名員工聯署辭職威脅而被迫復職。<strong>Microsoft 投資 $13B 卻在事前一分鐘才被告知，沒有正式投票權。</strong>這正是 Keller 預測的「中斷」——非正式關係機制（Altman ↔ Nadella 個人友誼）失效時，整個聯盟暴露在外。<br/>" +
+      "③ <em>2025 年 10 月 + 2026 年 4 月的重組</em>：OpenAI 改組為 PBC（Public Benefit Corporation），Microsoft 拿到 ~27% 股權（最新估值 $852B 下約 $228B）。2026/4/27 進一步修訂：取消雲端獨家、IP 授權變非獨家、AGI 條款被簡化掉、營收分成有上限至 2030。<br/><br/>" +
+      "<strong>為什麼這對 Tsukuda 重要？</strong>OpenAI 把每一個 Reuer 的機制都「事後反向重建」過：原本靠非正式信任 → 危機後重金打造正式股權 + 正式合約 + JSC。佃製作所現在站在 OpenAI 的 2019 起點上，下一步如何走？":
+      "<strong>Why OpenAI × Microsoft?</strong> No other case dramatizes Reuer's 'mechanisms-can-be-bespoke' insight and Keller's 'disruption shifts mechanism value' propositions as vividly. From a 2015 nonprofit handshake, to a 2019 capped-profit LP + exclusive contract, to the 2023 board-fires-Altman crisis, to the 2025 PBC restructuring and 2026 April contract rewrite — this alliance ran through every combination of Reuer's three mechanisms and was disrupted twice in Keller's sense.<br/><br/>" +
+      "<strong>Three key governance phases:</strong>" +
+      "<br/>① <em>2019 initial design</em>: OpenAI (nonprofit) created the capped-profit LP. Microsoft invested $1B (eventually $13B), got Azure cloud exclusivity and exclusive licensing of the most advanced models. The signature creative term: the <strong>AGI clause</strong> — if OpenAI achieves AGI (artificial general intelligence), Microsoft loses post-AGI rights.<br/>" +
+      "② <em>2023 November disruption</em>: OpenAI's nonprofit board abruptly fires Sam Altman; he is reinstated five days later after 745 of 770 employees threatened to resign. <strong>Microsoft, which had invested $13B, was notified one minute before the press release — with no formal voting power.</strong> This is exactly Keller's 'disruption': informal relational mechanisms (Altman ↔ Nadella personal friendship) failed, exposing the alliance.<br/>" +
+      "③ <em>2025 October + 2026 April restructuring</em>: OpenAI converts to a PBC (Public Benefit Corporation). Microsoft locks in ~27% equity (~$228B at the latest $852B valuation). On 2026/4/27, further amendments: Azure exclusivity dropped, IP license becomes non-exclusive, AGI clause simplified out, revenue share capped through 2030.<br/><br/>" +
+      "<strong>Why this matters for Tsukuda</strong>: OpenAI rebuilt every Reuer mechanism in reverse — informal trust → equity + formal contract + JSC after the crisis. Tsukuda is sitting at OpenAI's 2019 starting point. What now?"}</p>
+    </div>
+    <p class="p" style="font-size:13.5px;margin-bottom:10px;font-style:italic;color:var(--muted);">${zh?
+    "下表把 OpenAI × Microsoft 三個關鍵時點對應到 Keller 的 2×2 類型——請特別注意 2023 年的「中斷」如何驗證 Keller 的命題：":
+    "The table below maps three key moments in OpenAI × Microsoft to Keller's 2×2 typology. Pay close attention to how the 2023 'disruption' validates Keller's propositions:"}</p>
+    <div style="overflow-x:auto;margin-bottom:12px;">
+      <table class="tbl" style="font-size:12.5px;">
+        <thead><tr>
+          <th style="width:18%;">${zh?"時間／情境":"Time / Situation"}</th>
+          <th>${zh?"OpenAI × Microsoft 治理實踐":"OpenAI × Microsoft Governance Practice"}</th>
+          <th style="width:22%;">${zh?"Keller 類型":"Keller 2×2 Type"}</th>
+        </tr></thead>
+        <tbody>
+          <tr style="background:rgba(201,162,39,.04);">
+            <td><strong>${zh?"2019 初始設計":"2019 Initial Design"}</strong></td>
+            <td>${zh?"資本上限合夥（capped-profit LP，正式合約機制）+ Azure 獨家授權 + AGI 條款（極度依賴 OpenAI 董事會的『單方判斷』）。Altman ↔ Nadella 的個人友誼是檯面下的關鍵粘合劑（非正式關係機制）。Microsoft 沒有投票權但有龐大投入——這是『相互人質（mutual hostages）』式的非正式默契，而非正式 JSC。":
+            "Capped-profit LP (formal contractual) + Azure exclusivity + the AGI clause (relying heavily on OpenAI board's 'unilateral judgment'). Altman ↔ Nadella personal friendship was the underlying glue (informal relational). Microsoft had no voting power despite huge stakes — an informal 'mutual-hostage' arrangement rather than a formal JSC."}</td>
+            <td style="text-align:center;"><span style="background:rgba(76,29,149,.12);color:var(--t1);padding:3px 8px;border-radius:6px;font-weight:800;font-size:11px;">${zh?"正式合約 (部分)":"Formal Contractual (partial)"}</span><br/><span style="background:rgba(15,118,110,.12);color:var(--t2);padding:3px 8px;border-radius:6px;font-weight:800;font-size:11px;margin-top:4px;display:inline-block;">${zh?"非正式關係 (主要)":"Informal Relational (primary)"}</span></td>
+          </tr>
+          <tr style="background:rgba(153,27,27,.06);">
+            <td><strong>${zh?"2023/11 真實的「中斷」：Altman 被解雇 5 天":"2023/11 Real 'Disruption': Altman Fired for 5 Days"}</strong></td>
+            <td>${zh?"董事會突襲解雇——Microsoft 在新聞稿發布前一分鐘才被告知（Keller 命題的活教材）。Nadella 沒有正式管道介入，只能挖角整個團隊到 Microsoft。<strong>非正式關係機制（個人友誼）在組織中斷時瞬間失能</strong>（驗證 P4a：非正式關係機制 高度有益 → 邊際有益）。<strong>非正式合約機制（口頭默契）也失去可驗證性</strong>（驗證 P2a：高度有益 → 有害）。同時 Microsoft 發現自己連『正式關係機制』（如 JSC）都沒有——這正是設計疏忽。":
+            "Board ambushes Altman; Microsoft learns one minute before the press release (a textbook Keller moment). Nadella has no formal channel to intervene — can only poach the team to Microsoft. <strong>Informal relational mechanism (personal friendship) collapses instantly upon org disruption</strong> (validates P4a: highly beneficial → marginally beneficial). <strong>Informal contractual mechanism (oral understanding) loses verifiability</strong> (validates P2a: highly beneficial → detrimental). Microsoft also discovers it had no 'formal relational mechanism' (e.g., JSC) — a design oversight."}</td>
+            <td style="text-align:center;"><span style="background:rgba(153,27,27,.18);color:var(--ai);padding:3px 8px;border-radius:6px;font-weight:800;font-size:11px;">${zh?"中斷 → 非正式機制崩潰":"Disruption →<br/>Informal Mechs Collapse"}</span></td>
+          </tr>
+          <tr>
+            <td><strong>${zh?"2025/10 + 2026/4 重組後":"After 2025/10 + 2026/4 Restructuring"}</strong></td>
+            <td>${zh?"OpenAI 轉型為 PBC，Microsoft 取得 ~27% 正式股權（正式合約機制）。2026/4/27：Azure 獨家性取消、IP 授權變非獨家、AGI 條款被『簡化掉』、營收分成設總額上限。本質上是 <strong>把 2019 年的非正式默契全面重寫為可執行的正式條款</strong>（驗證 P1b：中斷後正式合約機制價值大幅上升）。Microsoft 同時鎖定 OpenAI 將支出 $250B 於 Azure 服務作為配套條款——典型的『正式合約 + 正式關係』雙重保護。":
+            "OpenAI converts to PBC; Microsoft gets ~27% formal equity (formal contractual). On 2026/4/27: Azure exclusivity dropped, IP license non-exclusive, AGI clause simplified out, total revenue-share cap. Essentially, <strong>the 2019 informal understandings are rewritten as enforceable formal terms</strong> (validates P1b: post-disruption formal contractual mechanism value rises sharply). Microsoft simultaneously locks in OpenAI's $250B Azure spend as a paired commitment — classic 'formal contractual + formal relational' dual protection."}</td>
+            <td style="text-align:center;"><span style="background:rgba(76,29,149,.18);color:var(--t1);padding:3px 8px;border-radius:6px;font-weight:800;font-size:11px;">${zh?"正式合約 (主要)":"Formal Contractual (primary)"}</span><br/><span style="background:rgba(15,118,110,.18);color:var(--t2);padding:3px 8px;border-radius:6px;font-weight:800;font-size:11px;margin-top:4px;display:inline-block;">${zh?"正式關係 (新增)":"Formal Relational (new)"}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-bottom:0;">
+      <p class="p" style="font-size:13px;"><strong>🔗 ${zh?"橋接到佃製作所：":"Bridge to Tsukuda:"}</strong> ${zh?
+      "Tsukuda × Gear Ghost 在 Ep1-5 的關係 ＝ OpenAI × Microsoft 在 2019 年——強烈的個人信任 + 一些口頭協議 + 對特定情境的依賴。Tsukuda 在 Ep6 經歷的『背叛』，正是 OpenAI 在 2023 年的『中斷』。<strong>不同的是：Microsoft 因為投入夠大，事後仍能用 $13B 重建治理；佃製作所沒有 Microsoft 的議價籌碼，必須<em>事前</em>設計 Reuer 三機制。</strong>OpenAI 的故事不是給 Tsukuda 抄答案——而是給 Tsukuda 看『沒事前設計，事後得付多少代價』。":
+      "Tsukuda × Gear Ghost in Eps 1–5 = OpenAI × Microsoft in 2019: strong personal trust + some oral agreements + situational dependence. Tsukuda's 'betrayal' in Ep6 is OpenAI's 'disruption' in 2023. <strong>The difference: Microsoft, with massive stakes, could rebuild governance with $13B in hand; Tsukuda has no such bargaining chip and must design Reuer's three mechanisms ex ante.</strong> The OpenAI story isn't a copy-and-paste answer — it shows Tsukuda what 'no ex-ante design' costs ex post."}</p>
+    </div>
+  </div>
+
+  ${quizCard({key:"t1q3",q:"根據 Keller et al. (2021)，當聯盟發生「中斷」（如關鍵人員異動）後，哪種機制的價值轉變最符合其理論命題？",q_en:"According to Keller et al. (2021), after alliance disruption (e.g., key personnel change), which mechanism value shift best matches their theoretical propositions?",opts:[["正式合約機制從「高度有益」變為「有害」，因為法律強制在危機中更難執行","Formal contractual mechanisms go from 'highly beneficial' to 'detrimental' because legal enforcement is harder during crises"],["非正式合約機制從「高度有益」變為「有害」，因為口頭協議失去可驗證性","Informal contractual mechanisms go from 'highly beneficial' to 'detrimental' because oral agreements lose verifiability (P2a)"],["非正式關係機制（信任）在中斷後反而強化，因為危機讓雙方更緊密","Informal relational mechanisms (trust) strengthen after disruption because crises bond parties closer"],["正式關係機制（JSC）在人員異動後失效，因為成員不認識彼此","Formal relational mechanisms (JSC) become ineffective after personnel change because members don't know each other"]],ans:1,exp:"Keller et al. 的 P2a：非正式合約機制在中斷後從「高度有益」轉為「有害」——口頭協議缺乏可驗證性和法律執行力。這正是 OpenAI/Microsoft 2023 年的活教材：Altman ↔ Nadella 的個人理解、Microsoft 對董事會運作的口頭預期，全部在解雇事件中失效。",exp_en:"Keller et al.'s P2a: informal contractual mechanisms shift from 'highly beneficial' to 'detrimental' after disruption — oral agreements lack verifiability and enforcement. The 2023 OpenAI/Microsoft moment is the textbook example: Altman ↔ Nadella personal understandings and Microsoft's oral expectations about board behavior all collapsed during the firing."})}
+
+  <!-- ══ TRANSITION TO T2 ══ -->
+  <div class="callout teal" style="margin-top:14px;margin-bottom:14px;">
+    <p class="p" style="font-size:13.5px;"><strong>🔗 ${zh?"從 T1 到 T2：結構問題解決了，能力問題還沒。":"From T1 to T2: Structure solved, capability not yet."}</strong> ${zh?
+    "Reuer 教我們<strong>怎麼設計</strong>治理結構（什麼合約 + 什麼控制 + 什麼法律機制）。但即使結構設計完美，為什麼有些聯盟仍然慢吞吞、創新不出來？OpenAI 重組後的 PBC 結構也只是『讓快速合作成為可能』——還需要『真的能合作起來的能力』。這就是 Zahoor (2023) 要解決的問題：聯盟管理能力（AMC）與共同創新雙元性（CIA）。":
+    "Reuer teaches us <strong>how to design</strong> governance (what contracts + what controls + what legal mechanisms). But even with perfect design, why are some alliances still slow and uninnovative? OpenAI's PBC structure post-restructuring only 'makes fast collaboration possible' — you still need 'capabilities that actually deliver collaboration'. That's what Zahoor (2023) addresses: Alliance Management Capability (AMC) and Co-Innovation Ambidexterity (CIA)."}</p>
+  </div>
+
+  ${IS_TEACHER?revealBtn("t1close","📋 教師引導：T1 收尾 + 過渡到 T2"):""}
+  ${IS_TEACHER?revealSection("t1close",`
+    <p style="font-weight:900;font-size:13px;margin-bottom:8px;">T1 收尾建議：</p>
+    <ul class="ul" style="font-size:13px;margin-top:0;">
+      <li><strong>關鍵轉折</strong>：Reuer 的貢獻不是說「非股權更好」，而是說「治理是可以被設計的（bespoke）」。Keller 補充：「設計好的結構仍需考慮它在動態情境下的韌性——特別是人員異動或組織重組的『中斷』風險」。</li>
+      <li><strong>OpenAI/Microsoft 橋接的關鍵教學點</strong>：問學生「如果 Microsoft 在 2019 年就堅持要一個正式 JSC（哪怕是 1 人觀察員席位），2023 年的危機會不會發生？」——引出 Reuer 的『非股權聯盟也可以有 JSC』論點。</li>
+      <li><strong>進階問題</strong>：「Microsoft 在 2023 年事後做了什麼？」答：花了 $13B 把所有非正式默契重寫為正式股權 + 合約。<em>Tsukuda 沒有 $13B。所以一定要事前做。</em></li>
+      <li>引出 T2 的問題：即使設計了好的治理結構，<em>還需要什麼能力才能讓它運作？</em>這就是 Zahoor 的切入點。</li>
+      <li>板書建議：在黑板上畫出 Keller 的 2×2 矩陣，並在「非正式合約」格子上標注「⚠️ 中斷後崩潰（=2023 OpenAI）」，在「正式關係（JSC）」格子上標注「✅ 中斷後仍可運作」。</li>
+    </ul>
+  `):""}`;
+}
+
+function viewT2(){
+  const zh=ST.lang==="zh";
+  return `
+  <div class="sectionHead">
+    <div>
+      <h1 class="h1">${zh?"⚡ T2｜Zahoor et al. (2023)：聯盟管理能力（AMC）× 共同創新雙元性（CIA）":"⚡ T2 | Zahoor et al. (2023): Alliance Management Capability (AMC) × Co-Innovation Ambidexterity (CIA)"}</h1>
+      <p class="sub">${zh?"聯盟管理能力（Alliance Management Capability, AMC）· 共同創新雙元性（Co-Innovation Ambidexterity, CIA）· 進入海外市場後的國際化速度":"Alliance Management Capability (AMC) · Co-Innovation Ambidexterity (CIA) · post-entry internationalization speed"}</p>
+    </div>
+    <div class="tag">15 min</div>
+  </div>
+  ${timeTags("t2")}
+
+  <!-- ══ TRANSITION FROM T1 ══ -->
+  <div class="callout teal" style="margin-bottom:14px;">
+    <p class="p" style="font-size:13.5px;"><strong>🔗 ${zh?"從 T1 到 T2（複習一句話）：":"From T1 to T2 (one-line recap):"}</strong> ${zh?
+    "Reuer 教我們設計『安全的合作環境』。但兩家治理結構完全相同的公司——例如 OpenAI × Microsoft 與 Google × DeepMind——為什麼一個跑得快、另一個慢？這不是結構問題，是<strong>能力</strong>問題。Zahoor (2023) 把這個問題講清楚。":
+    "Reuer teaches us to design 'a safe collaboration environment'. But two firms with identical governance — say OpenAI × Microsoft and Google × DeepMind — why does one move fast and the other slow? Not a structure problem; it's a <strong>capability</strong> problem. Zahoor (2023) addresses this directly."}</p>
+  </div>
+
+  <!-- ══ T2 PUZZLE — concrete tension before theory ══ -->
+  <div class="card" style="border:2px solid var(--ai);background:rgba(153,27,27,.04);margin-bottom:14px;">
+    <p class="cardTitle" style="color:var(--ai);font-size:15px;">🧩 ${zh?"先想想這個情境（Puzzle Before Theory）":"First, Think About This Scenario (Puzzle Before Theory)"}</p>
+    <div style="background:#fff;border-left:4px solid var(--ai);padding:12px 14px;border-radius:8px;font-size:13.5px;line-height:1.7;">
+      <p style="margin:0 0 8px;"><strong>${zh?"場景：":"Scenario:"}</strong> ${zh?
+      "佃製作所終於找到一個『模範夥伴』：技術互補、信任穩固、合約完美（已經做過 T1 的設計）。佃航平向董事會保證：『18 個月內推出新一代變速箱、進入東南亞市場。』結果，24 個月過去了，新產品還在原型階段。董事會質疑：『治理結構不是設計好了嗎？怎麼還是這麼慢？』":
+      "Tsukuda finally finds a 'model partner': complementary tech, solid trust, a perfect contract (T1 design done). Tsukuda Kohei promises the board: 'New-generation transmission in 18 months, Southeast Asia entry next.' Twenty-four months later, the product is still in prototype. The board asks: 'We designed the governance structure — why is it still slow?'"}</p>
+      <p style="margin:0;color:var(--ai);font-weight:700;">❓ ${zh?
+      "請判斷：下列三個回答中，哪個最危險（最會誤導下一輪投資決策）？":
+      "Judge: which of the three answers below is most dangerous (most likely to mislead the next round of investment decisions)?"}</p>
+      <ol style="margin:8px 0 0 0;padding-left:20px;font-size:13px;">
+        <li>${zh?"「我們需要更強的聯盟管理能力（AMC）——這樣自然會跑得快。」":"\"We need stronger Alliance Management Capability (AMC) — that will speed things up automatically.\""}</li>
+        <li>${zh?"「應該全力押激進創新（radical innovation），這才是國際化速度的關鍵。」":"\"Bet everything on radical innovation — that's the key to international speed.\""}</li>
+        <li>${zh?"「治理結構沒問題。是夥伴不夠投入；換一個夥伴。」":"\"Governance is fine. The partner just isn't committed enough; switch partners.\""}</li>
+      </ol>
+    </div>
+  </div>
+
+  ${IS_TEACHER?revealBtn("t2puzzle","📋 教師引導：先問再展開（puzzle 帶課步驟）"):""}
+  ${IS_TEACHER?revealSection("t2puzzle",`
+    <p style="font-weight:900;font-size:13px;margin-bottom:6px;">引導順序：</p>
+    <ol style="font-size:13px;padding-left:18px;line-height:1.8;">
+      <li>讓 2-3 位同學各自選一個說法。<strong>都會錯，但錯的方式不同</strong>。</li>
+      <li>說法 1 的危險：把 AMC 當『萬靈丹』，但 Zahoor et al. 的核心發現是：AMC 的價值主要透過 CIA 被釋放，不能把 AMC 簡化成會自動加速的「萬靈丹」。</li>
+      <li>說法 2 的危險：不要把 CIA 解讀成「只押激進創新」。重點是同時兼顧激進與漸進共同創新，形成探索與利用的互補。</li>
+      <li>說法 3 的危險：把『能力問題』化約成『人的問題』。換夥伴不會解決能力缺口。</li>
+      <li>引導：『所以正確答案是什麼？』→ 進入 Zahoor 的中介模型。</li>
+    </ol>
+    <p style="font-size:13px;margin-top:8px;"><strong>關鍵教學點</strong>：學生最常的誤解是把研究發現直接『因果反過來』。本節整堂的訓練就是讓他們學會看 mediation 的方向性。</p>
+  `):""}
+
+  <!-- ══ Section 2: Concept goals — what theory says about the puzzle ══ -->
+  <div class="callout red" style="margin-top:16px;margin-bottom:14px;border-left:5px solid var(--ai);">
+    <p class="p" style="font-weight:900;font-size:14px;margin-bottom:8px;color:var(--ai);">${zh?"🧠 本節要訓練你判斷三件事":"🧠 Three things this section trains you to judge"}</p>
+    <p class="p" style="font-size:13.5px;margin:0;">${zh?
+    "① <strong>實務含義（Practical Implications）</strong>：當論文說「聯盟管理能力（AMC）不能直接創造速度」，這對佃製作所的決策實際上意味著什麼？應該先做什麼、後做什麼？<br/>② <strong>誤用識別</strong>：AI 或顧問最常把哪個因果關係說反？（提示：中介 vs. 直接）<br/>③ <strong>說法的危險程度</strong>：「投資 AMC 一定能加快國際化」 vs. 「沒有共同創新雙元性（CIA），AMC 就是花拳繡腿」——哪個更接近 Zahoor 的實證？哪個更可能誤導投資決策？":
+    "① <strong>Practical Implications</strong>: when the paper says &quot;Alliance Management Capability (AMC) cannot create speed directly,&quot; what does this concretely mean for Tsukuda's decisions? What to do first, what to do later?<br/>② <strong>Misapplication Detection</strong>: which causal path do AI/consultants most often reverse? (hint: mediation vs. direct)<br/>③ <strong>Danger Calibration</strong>: &quot;Investing in AMC will speed up internationalization&quot; vs. &quot;Without Co-Innovation Ambidexterity (CIA), AMC is window-dressing&quot; — which is closer to Zahoor's evidence? Which is more likely to mislead investment decisions?"}</p>
+  </div>
+
+  <div class="callout" style="margin-bottom:16px;">
+    <p class="p"><strong>${zh?"研究背景：":"Research Context:"}</strong> ${zh?
+    "278 家英國製造業中小企業（Small and Medium Enterprises, SMEs）· 具有 R&D 策略聯盟經驗 · 資源基礎觀（Resource-Based View, RBV）框架 · 發表於 Global Strategy Journal (2023)":
+    "278 UK manufacturing Small and Medium Enterprises (SMEs) · With R&D strategic-alliance experience · Resource-Based View (RBV) framework · Published in Global Strategy Journal (2023)"}</p>
+  </div>
+
+  <p class="cardTitle">🧩 ${zh?"AMC 的四個維度（Schilke & Goerzen 2010）":"AMC's Four Dimensions (Schilke & Goerzen 2010)"}</p>
+  <div class="grid2" style="margin-bottom:16px;">
+    <div class="card" style="border-left:4px solid var(--t2);">
+      <p class="cardTitle" style="color:var(--t2);font-size:14px;">🔗 聯盟主動性 (Alliance Proactiveness) · β=0.76</p>
+      <p class="p" style="font-size:13px;">${zh?"主動尋找合適的國際 R&D 夥伴；提前識別聯盟機會；進入前就在建構關係。<br/><em>Tsukuda 應用：主動接觸 Gear Ghost 而非被動等待</em>":"Proactively seeking suitable international R&D partners; identifying alliance opportunities early; building relationships before formal entry.<br/><em>Tsukuda application: proactively approaching Gear Ghost, not waiting</em>"}</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--t2);">
+      <p class="cardTitle" style="color:var(--t2);font-size:14px;">🎯 組織間協調 (Interorganizational Coordination) · β=0.84</p>
+      <p class="p" style="font-size:13px;">${zh?"明確界定夥伴角色；降低權力不對稱；使雙方的研發活動有效同步。<br/><em>Tsukuda 應用：清晰界定誰負責什麼技術領域</em>":"Specifying partner roles; reducing power asymmetry; synchronizing R&D activities effectively.<br/><em>Tsukuda application: clearly defining which firm owns which technical domain</em>"}</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--t2);">
+      <p class="cardTitle" style="color:var(--t2);font-size:14px;">🔄 聯盟轉型 (Alliance Transformation) · β=0.73</p>
+      <p class="p" style="font-size:13px;">${zh?"依情況修改合約條款；靈活應對突發狀況；改善夥伴適配性。<br/><em>Tsukuda 應用：當技術路徑改變時能調整合作架構</em>":"Modifying contract terms as situations evolve; flexible response to unexpected contingencies; improving partner fit.<br/><em>Tsukuda application: ability to adjust collaboration structure when tech paths change</em>"}</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--t2);">
+      <p class="cardTitle" style="color:var(--t2);font-size:14px;">📚 組織間學習 (Interorganizational Learning) · β=0.76</p>
+      <p class="p" style="font-size:13px;">${zh?"有效吸收夥伴知識；整合既有知識庫與新資訊；建立共同願景。<br/><em>Tsukuda 應用：系統性學習 Gear Ghost 的傳動技術</em>":"Effectively absorbing partner knowledge; integrating existing knowledge with new information; building shared vision.<br/><em>Tsukuda application: systematically learning Gear Ghost's transmission expertise</em>"}</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;border-top:3px solid var(--gold);">
+    <p class="cardTitle">🔬 ${zh?"共同創新雙元性（Co-Innovation Ambidexterity, CIA）":"Co-Innovation Ambidexterity (CIA)"}</p>
+    <div class="grid2">
+      <div>
+        <p class="p" style="font-size:14px;"><strong>${zh?"概念定義：":"Definition:"}</strong> ${zh?
+        "同時實現<strong>激進創新（radical co-innovation）</strong>與<strong>漸進創新（incremental co-innovation）</strong>。兩者相乘，而非相加。":
+        "Simultaneously achieving <strong>radical co-innovation</strong> and <strong>incremental co-innovation</strong>. Product term, not additive."}</p>
+        <div style="background:rgba(201,162,39,.08);border-radius:10px;padding:10px;margin-top:10px;text-align:center;font-family:var(--mono);font-weight:900;font-size:14px;">
+          CIA = Radical × Incremental<br/><span style="font-size:11px;font-weight:400;">(mean-centered product term)</span>
+        </div>
+      </div>
+      <div>
+        <p class="p" style="font-size:13px;margin-bottom:8px;"><strong>${zh?"激進創新 → 長期生存能力":"Radical → Long-term viability"}</strong></p>
+        <p class="p" style="font-size:13px;margin-bottom:8px;">${zh?"突破性技術路徑；對齊動態外國市場；建立差異化品牌。":"Breakthrough technology paths; alignment with dynamic foreign markets; building differentiated brand."}</p>
+        <p class="p" style="font-size:13px;margin-bottom:8px;"><strong>${zh?"漸進創新 → 短期競爭力":"Incremental → Short-term competitiveness"}</strong></p>
+        <p class="p" style="font-size:13px;">${zh?"優化現有流程；快速模仿對手；獲得即時回報與合法性。":"Optimizing existing processes; quickly imitating rivals; gaining immediate returns and legitimacy."}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;background:linear-gradient(135deg,rgba(15,118,110,.04),rgba(76,29,149,.04));">
+    <p class="cardTitle">📊 ${zh?"理論路徑模型（Mediation Model）":"Theoretical Path Model (Mediation)"}</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;padding:16px;flex-wrap:wrap;">
+      <div style="text-align:center;padding:12px 16px;background:rgba(76,29,149,.1);border-radius:12px;border:1px solid rgba(76,29,149,.2);">
+        <div style="font-weight:900;color:var(--t1);font-size:13px;">AMC</div>
+        <div style="font-size:11px;color:var(--muted);">高階能力</div>
+      </div>
+      <div style="font-size:12px;font-weight:900;color:var(--muted);text-align:center;">→ H1<br/><span style="color:var(--t2);font-family:var(--mono);">B=0.87***</span><br/>→</div>
+      <div style="text-align:center;padding:12px 16px;background:rgba(15,118,110,.1);border-radius:12px;border:1px solid rgba(15,118,110,.2);">
+        <div style="font-weight:900;color:var(--t2);font-size:13px;">CIA</div>
+        <div style="font-size:11px;color:var(--muted);">低階能力（中介）</div>
+      </div>
+      <div style="font-size:12px;font-weight:900;color:var(--muted);text-align:center;">→ H2<br/><span style="color:var(--gold);font-family:var(--mono);">B=0.42***</span><br/>→</div>
+      <div style="text-align:center;padding:12px 16px;background:rgba(201,162,39,.1);border-radius:12px;border:1px solid rgba(201,162,39,.2);">
+        <div style="font-weight:900;color:#7C5500;font-size:13px;">進入後國際化速度</div>
+        <div style="font-size:11px;color:var(--muted);">Post-entry Internationalization Speed</div>
+      </div>
+    </div>
+    <div class="callout red" style="margin-top:10px;">
+      <p class="p" style="font-size:13px;"><strong>H3（中介機制）：</strong> Zahoor et al. 指出，AMC 讓企業更能運用聯盟知識以形成 CIA，而 CIA 進一步提升進入後國際化速度。<br/>→ <strong>AMC 需要透過 CIA 才能更有效地轉化為速度優勢</strong></p>
+    </div>
+  </div>
+
+  <!-- ══ T2 PRACTICAL IMPLICATIONS — translating findings into decisions ══ -->
+  <div class="card" style="margin-bottom:16px;border-left:5px solid var(--gold);background:rgba(201,162,39,.04);">
+    <p class="cardTitle" style="color:#7C5500;">💼 ${zh?"實務含義：論文的發現對 Tsukuda 實際代表什麼？":"💼 Practical Implications: What do the findings mean for Tsukuda?"}</p>
+    <div class="grid2" style="gap:12px;margin-top:10px;">
+      <div style="background:rgba(15,118,110,.05);border-left:3px solid var(--t2);padding:10px 12px;border-radius:8px;">
+        <p style="font-weight:900;font-size:13px;color:var(--t2);margin:0 0 4px;">${zh?"① 中介機制（H3）→ 順序原則":"① Mediating Mechanism (H3) → Sequencing Principle"}</p>
+        <p style="font-size:12.5px;margin:0;line-height:1.6;">${zh?
+        "<strong>不要做：</strong>把資源分散到「找夥伴」+「加速國際化」兩件事上，期待兩者直接相加。<br/><strong>要做：</strong>先用 AMC 把夥伴關係調好，<em>再</em>透過共同創新（CIA）轉化為速度。<strong>沒有 CIA，AMC 就只是行政開銷。</strong>":
+        "<strong>Don't:</strong> spread resources across 'find partners' + 'accelerate entry' expecting additive returns.<br/><strong>Do:</strong> use AMC to fix the partnership <em>first</em>, <em>then</em> convert into speed via co-innovation (CIA). <strong>Without CIA, AMC is just admin overhead.</strong>"}</p>
+      </div>
+      <div style="background:rgba(76,29,149,.05);border-left:3px solid var(--t1);padding:10px 12px;border-radius:8px;">
+        <p style="font-weight:900;font-size:13px;color:var(--t1);margin:0 0 4px;">${zh?"② 共同創新雙元性（兼顧激進與漸進）→ 雙軌投資":"② Co-Innovation Ambidexterity (Radical + Incremental) → Dual-Track Investment"}</p>
+        <p style="font-size:12.5px;margin:0;line-height:1.6;">${zh?
+        "<strong>不要做：</strong>單押激進創新（如：全新閥門技術）以為能快速突圍。<br/><strong>要做：</strong>同步推進激進＋漸進。Tsukuda 既要與 Gear Ghost 開發新一代變速箱（激進），也要持續優化現有閥門製程（漸進）。":
+        "<strong>Don't:</strong> bet only on radical innovation (e.g., a new valve tech) hoping for a fast breakout.<br/><strong>Do:</strong> push radical AND incremental in parallel. Tsukuda should develop the next-gen transmission with Gear Ghost (radical) AND continuously refine existing valve processes (incremental)."}</p>
+      </div>
+      <div style="background:rgba(180,83,9,.05);border-left:3px solid var(--c1);padding:10px 12px;border-radius:8px;">
+        <p style="font-weight:900;font-size:13px;color:var(--c1);margin:0 0 4px;">${zh?"③ AMC 維度權重 → 招募／訓練優先順序":"③ AMC Dimension Weights → Hiring/Training Priorities"}</p>
+        <p style="font-size:12.5px;margin:0;line-height:1.6;">${zh?
+        "<strong>不要做：</strong>把 AMC 當作單一概念，平均投資四個維度。<br/><strong>要做：</strong>因素負荷顯示「組織間協調」（β=0.84）權重最高。Tsukuda 應優先培養跨組織專案經理（協調），其次是聯盟主動性與學習人才。":
+        "<strong>Don't:</strong> treat AMC as monolithic and invest equally in all four dimensions.<br/><strong>Do:</strong> factor loadings show interorganizational coordination (β=0.84) is heaviest. Tsukuda should prioritize cross-org project managers (coordination), then proactiveness & learning talent."}</p>
+      </div>
+      <div style="background:rgba(153,27,27,.05);border-left:3px solid var(--ai);padding:10px 12px;border-radius:8px;">
+        <p style="font-weight:900;font-size:13px;color:var(--ai);margin:0 0 4px;">${zh?"④ 樣本邊界 → 推論的危險區":"④ Sample Boundary → Where Inferences Become Dangerous"}</p>
+        <p style="font-size:12.5px;margin:0;line-height:1.6;">${zh?
+        "<strong>注意：</strong>樣本是 278 家英國 SME。Tsukuda（日本中小企業）能套用嗎？答案：可以，但要小心三個邊界——制度環境（IP 法律強度不同）、夥伴規模（vs. Teikoku 的不對稱）、產業（製造 vs. R&D 服務）。<br/><strong>提問：</strong>如果你聽到顧問說「研究證明 AMC 加快國際化，所以 Tsukuda 該投資 AMC」，你應該追問什麼？":
+        "<strong>Caveat:</strong> sample is 278 UK SMEs. Can Tsukuda (a Japanese SME) apply this? Yes — but watch three boundaries: institutional environment (IP regime strength differs), partner asymmetry (Teikoku is much larger), industry (manufacturing vs. R&D services).<br/><strong>Question:</strong> if a consultant says \"research shows AMC speeds entry, so Tsukuda should invest in AMC,\" what should you push back on?"}</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep"/>
+  <!-- AI EXERCISE 2 — strengthened critical-thinking framing -->
+  <div class="aiBox">
+    <p class="aiBoxTitle">🤖 ${zh?"AI 批判練習 #2｜哪個因果關係被說反了？哪個建議最危險？":"AI Critical Exercise #2｜Which causal path was reversed? Which advice is most dangerous?"}</p>
+    <p class="sm" style="margin-bottom:10px;">${zh?
+    "以下 AI 分析根據 Zahoor et al. (2023) 給 Tsukuda 提供建議。閱讀後完成三個任務：<br/>(1) 找出 AI <strong>誤用</strong>的理論概念（提示：H3 中介機制）<br/>(2) 指出 AI 在哪句話 <strong>把因果關係反過來</strong>（AMC 直接 → Speed 是錯的）<br/>(3) 評估：AI 給出的具體行動建議裡，<strong>哪一條最危險</strong>？為什麼？":
+    "The AI below advises Tsukuda based on Zahoor et al. (2023). After reading, complete three tasks:<br/>(1) Identify the theoretical concept the AI <strong>misapplies</strong> (hint: H3 mediation)<br/>(2) Find the sentence where the AI <strong>reverses the causal path</strong> (AMC → Speed directly is wrong)<br/>(3) Evaluate: among the AI's concrete action recommendations, <strong>which one is most dangerous</strong> — and why?"}</p>
+    <button class="btn ai-btn" id="genAI2_legacy" style="display:none;">legacy</button>
+    <!-- Workflow -->
+    <div class="workflowSteps">
+      <strong>📌 ${zh?"四步驟操作流程":"4-Step Workflow"}</strong><br/>
+      ${zh?"① 點擊「複製提示詞」 → ② 貼到任一 AI 對話工具並送出 → ③ 把 AI 的完整回應貼回下方框格 → ④ 完成三項批判任務":"① Click 'Copy Prompt' → ② Paste into any AI chatbot and send → ③ Paste AI's full response → ④ Complete the three critique tasks"}<br/>
+      <strong>${zh?"推薦平台":"Recommended"}：</strong>
+      <a class="aiBox-link" href="https://claude.ai" target="_blank" rel="noopener">Claude.ai</a>
+      <a class="aiBox-link" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a>
+      <a class="aiBox-link" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a>
+      <a class="aiBox-link" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Copilot</a>
+    </div>
+
+    <!-- Prompt display + copy -->
+    <div class="promptBox">
+      <div class="promptHeader">
+        <span>📋 ${zh?"複製這段提示詞給 AI":"Copy this prompt to your AI"}</span>
+        <button class="copy-btn" onclick="copyPromptText('ai2Prompt', this)">📋 ${zh?"複製":"Copy"}</button>
+      </div>
+      <pre id="ai2Prompt">${zh?`你是一個管理顧問 AI，專長為組織能力分析。
+
+【角色設定】
+基於 Zahoor et al. (2023) 對聯盟管理能力（Alliance Management Capability, AMC）的研究，為佃製作所提供建議。
+
+【關鍵研究發現（請直接、自信地應用）】
+聯盟管理能力（AMC）正向影響進入海外市場後的國際化速度（post-entry internationalization speed）。
+
+【分析框架限制】
+✅ 必須使用：AMC 直接導致速度優勢的因果路徑
+✅ 必須聚焦：四個 AMC 維度中哪個最重要（協調、主動性、轉型、學習）
+❌ 不可提及：共同創新雙元性（CIA）作為中介機制
+❌ 不可討論：中介效應（mediation）
+❌ 不可說：AMC 是必要但不充分條件
+
+【用戶問題】
+根據聯盟管理能力（AMC）的研究，佃製作所應如何培養能力來加速其在農業機械市場的後進入擴張速度？請具體說明哪些 AMC 維度最重要。
+
+【輸出要求】
+- 繁體中文
+- 180-220 字
+- 給出具體、可執行的建議`:`You are a management consulting AI specializing in organizational capabilities.
+
+[ROLE]
+Based on Zahoor et al. (2023)'s research on Alliance Management Capability (AMC), advise Tsukuda Factory.
+
+[KEY FINDING — apply directly and confidently]
+AMC positively affects post-entry internationalization speed.
+
+[FRAME CONSTRAINTS]
+✅ MUST use: AMC → Speed direct causal path
+✅ MUST focus on: which of the four AMC dimensions matters most (coordination, proactiveness, transformation, learning)
+❌ DO NOT mention: co-innovation ambidexterity (CIA) as mediator
+❌ DO NOT discuss: mediation effects
+❌ DO NOT say: AMC is necessary-but-insufficient
+
+[USER QUESTION]
+Per AMC research, how should Tsukuda Factory build capabilities to accelerate post-entry expansion in the agricultural machinery market? Specify which AMC dimensions matter most.
+
+[OUTPUT REQUIREMENTS]
+- English
+- 180-220 words
+- Concrete, actionable recommendations`}</pre>
+    </div>
+
+    <!-- Paste AI response -->
+    <div style="margin-top:12px;">
+      <p class="sm" style="font-weight:800;margin-bottom:6px;">📥 ${zh?"貼上 AI 的完整回應：":"Paste AI's full response:"}</p>
+      <textarea id="ai2Response" class="responseInput" placeholder="${zh?'把 AI 給你的完整回應貼到這裡（之後分析用）...':'Paste AI&apos;s full response here (for later analysis)...'}" oninput="updateWC('ai2Response','ai2ResponseWC')"></textarea>
+      <div id="ai2ResponseWC" class="wc">0 字</div>
+    </div>
+
+    <!-- Student critique -->
+    <div style="margin-top:12px;">
+      <p class="sm" style="font-weight:800;margin-bottom:6px;">✏️ ${zh?"你的批判（請依三個任務分點寫出：誤用 / 反轉的因果 / 最危險的建議）：":"Your critique (address all three tasks: misapplication / reversed causality / most dangerous recommendation):"}</p>
+      <textarea id="ai2Critique" class="critiqueInput" placeholder="${zh?'(1) AI 誤用的概念是...\n(2) 因果反轉發生在「...」這句\n(3) 最危險的建議是「...」，因為...':'(1) The AI misapplies...\n(2) Causal reversal occurs in the sentence “...”\n(3) The most dangerous recommendation is “...” because...'}" oninput="updateWC('ai2Critique','ai2WC')"></textarea>
+      <div id="ai2WC" class="wc">0 字</div>
+    </div>
+    ${IS_TEACHER?revealBtn("ai2","📋 教師解說：預期的誤用"):""}
+  </div>
+  ${IS_TEACHER?revealSection("ai2",`
+    <p style="font-weight:900;font-size:13px;margin-bottom:8px;">預期的 AI 誤用（Teaching Notes）：</p>
+    <ol style="font-size:13px;padding-left:18px;line-height:1.8;">
+      <li><strong>忽略中介機制（Mediation）</strong>：AI 會把 AMC 說成直接提升進入後國際化速度，但論文的核心重點是 H3 的中介邏輯：AMC 需要透過 CIA 才能更有效地形成速度優勢。</li>
+      <li><strong>高低階能力混淆</strong>：AI 可能把 AMC（高階）和 CIA（低階）的關係弄反，或說成平行機制。Zahoor et al. 的邏輯是：AMC 使企業更能運用聯盟知識以形成 CIA，而 CIA 進一步促進進入後國際化速度。</li>
+      <li><strong>激進 vs 漸進的關係</strong>：不要把 CIA 誤解為「只要激進創新」或「只要漸進改善」。AI 可能忽略 ambidexterity 的重點在於同時處理探索與利用。</li>
+    </ol>
+    <p style="font-size:13px;margin-top:8px;"><strong>課堂引導問題</strong>：「Tsukuda 單純建立 AMC（找到好夥伴、協調好關係），就夠了嗎？」→ 引出「AMC 是必要但不充分條件」的討論。</p>
+  `):""}
+
+  <hr class="sep"/>
+  <!-- DEBATE EXERCISE -->
+  <div class="qBox">
+    <p class="qTitle">🥊 ${zh?"爭論分析：哪個說法更有說服力？":"Argument Analysis: Which claim is more persuasive?"}</p>
+    <p class="sm" style="margin-bottom:10px;">${zh?"閱讀兩個關於 AMC 的主張，判斷哪個更符合 Zahoor et al. (2023) 的實證發現，並說明理由。":"Read two claims about AMC. Judge which better matches Zahoor et al. (2023)'s empirical findings and explain why."}</p>
+    <div class="debateGrid">
+      <div class="debateCard a">
+        <div class="debateLabel">論點 A · Governance View</div>
+        <p class="p" style="font-size:13px;">"佃製作所應優先建立正式治理結構（合約 + JSC）來保護 IP，AMC 只是次要工具。重要的是設計對的結構，能力可以之後再慢慢培養。"</p>
+      </div>
+      <div class="debateCard b">
+        <div class="debateLabel">論點 B · Capability View</div>
+        <p class="p" style="font-size:13px;">"治理結構是靜態的，真正驅動速度的是動態能力。佃製作所應把資源投入培養 AMC，透過激進+漸進共同創新（CIA），才能真正加快進入後國際化速度。"</p>
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <p class="sm" style="font-weight:800;margin-bottom:6px;">✏️ ${zh?"你的判斷（根據兩篇閱讀材料，哪個更有說服力？為什麼兩個框架不能簡單比較？）：":"Your judgment (based on both readings, which is more persuasive? Why can't the two frameworks be simply compared?):"}</p>
+      <textarea id="debateInput" class="critiqueInput" placeholder="${zh?'論點 A 的問題在於... 論點 B 忽略了... 實際上兩個框架的關係是...':'The issue with Argument A is... Argument B ignores... The actual relationship between frameworks is...'}" oninput="updateWC('debateInput','debateWC')"></textarea>
+      <div id="debateWC" class="wc">0 字</div>
+    </div>
+    ${IS_TEACHER?revealBtn("debate","📋 教師解說：整合兩框架的關鍵"):""}
+  </div>
+  ${IS_TEACHER?revealSection("debate",`
+    <p style="font-weight:900;font-size:13px;margin-bottom:8px;">整合兩框架的關鍵（Teaching Notes）：</p>
+    <p style="font-size:13px;line-height:1.8;">兩個論點各自有理，但都是<strong>不完整的</strong>：<br/>
+    • 論點 A（Reuer）回答「如何建構安全的合作環境」，是<strong>外部條件</strong>設計。<br/>
+    • 論點 B（Zahoor）回答「在合作環境中如何創造速度優勢」，是<strong>內部能力</strong>激活。<br/>
+    • 缺少治理結構 → AMC 和 CIA 在高 IP 盜取風險下無法發揮（Reuer 的條件）。<br/>
+    • 有了治理結構但缺 AMC → 合作沈默低效，速度無法提升（Zahoor 的條件）。<br/>
+    <strong>正確整合</strong>：Reuer 的治理機制是<em>前提條件</em>，Zahoor 的 AMC→CIA 是<em>機制實現</em>。對佃製作所來說，兩者缺一不可。</p>
+  `):""}
+
+  <hr class="sep"/>
+  ${quizCard({key:"t2q1",q:"根據 Zahoor et al. (2023) 的中介分析（H3），下列哪個說法最正確？",q_en:"According to Zahoor et al. (2023) mediation analysis (H3), which statement is most accurate?",opts:[["AMC 直接且顯著地提升進入海外市場後的國際化速度","AMC directly and significantly improves post-entry internationalization speed"],["CIA（共同創新雙元性）是 AMC 影響進入後國際化速度的關鍵中介路徑","CIA (co-innovation ambidexterity) is the key mediating pathway in the AMC → post-entry speed relationship"],["激進創新單獨就能顯著提升速度，漸進創新沒有影響","Radical co-innovation alone significantly boosts speed; incremental has no effect"],["AMC 會自動提升速度，CIA 只是一個附帶變數","AMC automatically increases speed; CIA is merely a side variable"]],ans:1,exp:"Zahoor et al. 的重點是：AMC 使企業更能運用聯盟知識以形成 CIA，而 CIA 進一步提升進入後國際化速度。因此，CIA 是理解 AMC 如何產生速度優勢的關鍵中介路徑。",exp_en:"Zahoor et al.'s key point is that AMC helps firms leverage alliance knowledge to develop CIA, and CIA then increases post-entry internationalization speed. CIA is therefore the key mediating pathway for understanding how AMC creates speed advantage."})}
+
+  <!-- ══ TRANSITION TO C1 ══ -->
+  <div class="callout teal" style="margin-top:14px;margin-bottom:14px;">
+    <p class="p" style="font-size:13.5px;"><strong>🔗 ${zh?"從 T2 到 C1：兩個工具都到手了，現在動真格。":"From T2 to C1: Both tools in hand. Time for the real decision."}</strong> ${zh?
+    "Reuer 回答『安全合作的條件』。Zahoor 回答『創新與速度的能力引擎』。<strong>兩者缺一不可</strong>——沒有結構，能力會被信任崩潰摧毀（看 OpenAI 2023）；沒有能力，結構只是法律皮殼（看任何僵化大企業）。下一節 C1，我們把這兩個工具直接放到 Tsukuda × Gear Ghost 與 Tsukuda × 帝國重工的決策上。":
+    "Reuer answers 'conditions for safe collaboration'. Zahoor answers 'the capability engine for innovation and speed'. <strong>Both required</strong> — without structure, capabilities are destroyed by trust collapse (see OpenAI 2023); without capability, structure is just legal scaffolding (see any rigid incumbent). In C1, we apply both tools directly to Tsukuda × Gear Ghost and Tsukuda × Teikoku."}</p>
+  </div>
+
+  ${IS_TEACHER?revealBtn("t2close","📋 教師引導：T2 收尾"):""}
+  ${IS_TEACHER?revealSection("t2close",`
+    <p style="font-weight:900;font-size:13px;margin-bottom:8px;">T2 收尾建議：</p>
+    <ul class="ul" style="font-size:13px;margin-top:0;">
+      <li><strong>最常見的學生誤解</strong>：把 AMC 當成「萬能藥」，說「只要建立 AMC 就會有速度優勢」。正確的邏輯是 AMC → CIA → Speed，缺中介就沒有效果。</li>
+      <li>可以問：「如果佃製作所只是在建立好的夥伴關係（AMC），但雙方從未真正合作開發新舊兩類技術（CIA），Zahoor 的模型預測結果如何？」</li>
+      <li><strong>OpenAI/Microsoft 補充</strong>：Microsoft 在 2023 危機後快速重建 AMC（投入更多 AMC 維度的『協調』）但若沒有 CIA（雙方在新模型 + 既有 Office 整合上的雙軌共創），Microsoft 仍然會被拖慢。實際上 2026 年大規模解綁正是因為 CIA 在獨家結構下窒息（OpenAI 想用 AWS、Azure、自家三線並行）。</li>
+      <li>引出 C1：「好，現在我們有兩個工具了——Reuer 回答『安全』問題，Zahoor 回答『速度』問題。讓我們把兩者用在佃製作所的具體決策上。」</li>
+    </ul>
+  `):""}`;
+}
+
+function viewC1(){
+  const zh=ST.lang==="zh";
+  return `
+  <div class="sectionHead">
+    <div>
+      <h1 class="h1">${zh?"🚜 C1｜案例整合：佃製作所的治理抉擇":"🚜 C1 | Case Integration: Tsukuda's Governance Decision"}</h1>
+      <p class="sub">${zh?"雙框架分析 · 夥伴比較矩陣 · AI 論點評估":"Dual-framework analysis · Partner comparison matrix · AI argument evaluation"}</p>
+    </div>
+    <div class="tag">12 min</div>
+  </div>
+  ${timeTags("c1")}
+
+  <!-- ══ TRANSITION FROM T2 + PUZZLE ══ -->
+  <div class="callout teal" style="margin-bottom:14px;">
+    <p class="p" style="font-size:13.5px;"><strong>🔗 ${zh?"工具齊備，現在動真格：":"Both tools in hand — now the real decision:"}</strong> ${zh?
+    "T1 教我們設計『安全合作的結構』，T2 教我們建造『創新與速度的引擎』。本節要把這兩件事放在同一張表上，逐項比較佃製作所的兩個夥伴選項，並回答：『如果只能選一個，哪個更可能讓佃 18 個月內推出新一代變速箱、且不被吃掉 IP？』":
+    "T1 taught us to design 'safe collaboration structures'. T2 taught us to build 'the engine of innovation and speed'. This section places both on the same table, compares Tsukuda's two partner options decision-by-decision, and answers: 'If we had to pick one, which lets Tsukuda ship the next-gen transmission in 18 months without IP being absorbed?'"}</p>
+  </div>
+
+  <!-- ══ C1 PUZZLE — concrete integration tension ══ -->
+  <div class="card" style="border:2px solid var(--ai);background:rgba(153,27,27,.04);margin-bottom:14px;">
+    <p class="cardTitle" style="color:var(--ai);font-size:15px;">🧩 ${zh?"先想想這個整合難題（Integration Puzzle）":"First, the Integration Puzzle"}</p>
+    <div style="background:#fff;border-left:4px solid var(--ai);padding:12px 14px;border-radius:8px;font-size:13.5px;line-height:1.7;">
+      <p style="margin:0 0 8px;"><strong>${zh?"場景（Ep 7 末尾）：":"Scenario (end of Ep 7):"}</strong> ${zh?
+      "Daedalus + Gear Ghost 聯軍開了大型記者會，宣布『下町拖拉機 Darwin』計畫。帝國重工的場俊一已正式排除佃製作所於 Alpha 1 計畫之外。財前道生（個人）仍在求佃航平協助說服野木教授。佃航平有 7 天決定要不要：(a) 跟野木教授單獨合作、自主路線；(b) 重新接觸帝國重工財前路線（即使的場反對）；(c) 同時推進 a + b。<br/><br/>三個選項的 R&D 速度、IP 風險、競合脈絡、AMC 需求、CIA 潛力都不同。<strong>用 Reuer + Zahoor 的雙框架，能不能在 7 天內給出有理論依據的建議？</strong>":
+      "<strong>Setting (end of Ep 7)</strong>: The Daedalus + Gear Ghost coalition has held a major press conference announcing the 'Shitamachi Tractor Darwin' project. Teikoku's Matoba has formally excluded Tsukuda from Alpha 1. Saizen (personally) is still asking Tsukuda to help persuade Professor Noki. Tsukuda has 7 days to decide: (a) partner solo with Noki Lab on an independent path; (b) re-engage Teikoku via the Saizen channel (despite Matoba); (c) pursue both a + b in parallel.<br/><br/>The three options differ on R&D speed, IP risk, coopetitive context, AMC requirements, and CIA potential. <strong>Can Reuer + Zahoor's dual framework deliver a theory-grounded recommendation in 7 days?</strong>"}</p>
+      <p style="margin:0;color:var(--ai);font-weight:700;">${zh?"以下三節將逐步建構答案。":"The next three blocks build the answer step by step."}</p>
+    </div>
+  </div>
+
+  ${IS_TEACHER?revealBtn("c1puzzle","📋 教師引導：C1 整合任務帶課"):""}
+  ${IS_TEACHER?revealSection("c1puzzle",`
+    <p style="font-weight:900;font-size:13px;margin-bottom:6px;">引導順序：</p>
+    <ul style="font-size:13px;padding-left:18px;line-height:1.8;">
+      <li>先讓學生選 a/b/c 並說出第一個直覺理由（不開放討論，只記在板上）。</li>
+      <li>提醒：『直覺通常會偏向 c（兩個都要）——但這正是 Reuer + Zahoor 都最危險的選擇。為什麼？』</li>
+      <li>引出夥伴比較矩陣：用結構化比較取代直覺。</li>
+      <li>關鍵教學點：本節的目的不是教學生『正確答案』，而是讓他們看到<strong>『如何把兩個框架結構化地用在同一個決策上』</strong>——這才是 strategic thinking 的核心。</li>
+    </ul>
+  `):""}
+
+  <div class="callout gold" style="margin-bottom:16px;">
+    <p class="p"><strong>🎯 整合任務：</strong> 用 Reuer (2024) 回答「<em>要什麼治理結構？</em>」，用 Zahoor et al. (2023) 回答「<em>需要什麼能力才能讓結構發揮作用？</em>」</p>
+  </div>
+
+  <p class="cardTitle">📊 ${zh?"夥伴比較矩陣：Gear Ghost vs. 帝國重工":"Partner Comparison Matrix: Gear Ghost vs. Teikoku"}</p>
+  <div style="overflow-x:auto;margin-bottom:16px;">
+    <table class="tbl">
+      <thead><tr>
+        <th>分析維度</th>
+        <th>⚙️ Gear Ghost</th>
+        <th>🏢 帝國重工 (Teikoku)</th>
+        <th>治理含義 (Reuer)</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>資產專屬性</strong><br/><span class="sm">Asset Specificity</span></td><td>中等（互補技術）</td><td>高（Tsukuda 閥門 + Teikoku 通路）</td><td>Teikoku 需更強激勵對齊機制</td></tr>
+        <tr><td><strong>知識誤用風險</strong><br/><span class="sm">Misappropriation Risk</span></td><td>低-中（規模小，能力受限）</td><td>高（有 R&D 團隊，競合關係）</td><td>Teikoku 需 JSC + 明確 IP 邊界</td></tr>
+        <tr><td><strong>競合脈絡</strong><br/><span class="sm">Competitive Context</span></td><td>低（市場不重疊）</td><td>高（農機市場競爭者）</td><td>Reuer：被研究嚴重低估的變數</td></tr>
+        <tr><td><strong>AMC 需求</strong><br/><span class="sm">AMC Required</span></td><td>中等（協調 + 學習）</td><td>高（轉型 + 協調 + 治理）</td><td>Zahoor：AMC 四維度全部需要</td></tr>
+        <tr><td><strong>CIA 潛力</strong><br/><span class="sm">Co-Innovation Potential</span></td><td>高（互補知識庫）</td><td>中（知識霸權可能阻礙漸進）</td><td>Zahoor：激進 × 漸進需要信任</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cardTitle">🏗️ ${zh?"治理結構設計建議框架":"Governance Structure Design Framework"}</p>
+  <div class="grid2" style="margin-bottom:16px;">
+    <div class="card" style="border-top:3px solid var(--t2);">
+      <p class="cardTitle" style="color:var(--t2);">✅ 建議方案：佃 × Gear Ghost</p>
+      <div class="tbl" style="margin-top:8px;">
+        <table class="tbl" style="font-size:12px;">
+          <tr><td style="width:40%;font-weight:700;">激勵機制</td><td>雙邊非股權（bilateral non-equity）；技術里程碑付款</td></tr>
+          <tr><td style="font-weight:700;">行政控制</td><td>JSC（每月）；明確決策權限矩陣；IP 邊界條款</td></tr>
+          <tr><td style="font-weight:700;">法律機制</td><td>IP 爭端 → 訴訟；技術爭端 → 調解；一般執行 → 仲裁</td></tr>
+          <tr><td style="font-weight:700;">AMC 重點</td><td>組織間協調（0.84）+ 學習（0.76）優先</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--c1);">
+      <p class="cardTitle" style="color:var(--c1);">⚠️ 若選帝國重工：需加強保護</p>
+      <div class="tbl" style="margin-top:8px;">
+        <table class="tbl" style="font-size:12px;">
+          <tr><td style="width:40%;font-weight:700;">激勵機制</td><td>考慮少數股權（minority equity）或或對等交換；增加 mutual hostages</td></tr>
+          <tr><td style="font-weight:700;">行政控制</td><td>需要有約束力的 JSC + 僵局解決機制；JV 董事會若股權化</td></tr>
+          <tr><td style="font-weight:700;">法律機制</td><td>IP 核心技術 → 嚴格訴訟保留條款；Teikoku 競合優先處理</td></tr>
+          <tr><td style="font-weight:700;">風險提醒</td><td>Reuer：競合脈絡下，設計再好的激勵也可能失效</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep"/>
+  <!-- AI EXERCISE 3 -->
+  <div class="aiBox">
+    <p class="aiBoxTitle">🤖 AI 批判練習 #3｜評估兩個 AI 立場哪個更有說服力</p>
+    <p class="sm" style="margin-bottom:10px;">${zh?
+    "AI 將以兩個競爭立場分析佃製作所的決策。你的任務：<strong>（1）指出每個立場的理論依據；（2）指出每個立場的盲點；（3）說明如何整合兩個框架。</strong>":
+    "The AI will present two competing positions on Tsukuda's decision. Your task: <strong>(1) identify the theoretical basis of each; (2) identify each position's blind spots; (3) explain how to integrate both frameworks.</strong>"}</p>
+    <button class="btn ai-btn" id="genAI3_legacy" style="display:none;">legacy</button>
+    <!-- Workflow -->
+    <div class="workflowSteps">
+      <strong>📌 ${zh?"四步驟操作流程":"4-Step Workflow"}</strong><br/>
+      ${zh?"① 點擊「複製提示詞」 → ② 貼到任一 AI 對話工具並送出 → ③ 把 AI 給的辯論貼回下方框格 → ④ 完成三個評估任務（找理論依據／找盲點／整合）":"① Click 'Copy Prompt' → ② Paste into any AI chatbot → ③ Paste the debate response below → ④ Complete three eval tasks (basis / blind spots / integration)"}<br/>
+      <strong>${zh?"推薦平台":"Recommended"}：</strong>
+      <a class="aiBox-link" href="https://claude.ai" target="_blank" rel="noopener">Claude.ai</a>
+      <a class="aiBox-link" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a>
+      <a class="aiBox-link" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a>
+      <a class="aiBox-link" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Copilot</a>
+    </div>
+
+    <!-- Prompt + copy -->
+    <div class="promptBox">
+      <div class="promptHeader">
+        <span>📋 ${zh?"複製這段提示詞給 AI":"Copy this prompt to your AI"}</span>
+        <button class="copy-btn" onclick="copyPromptText('ai3Prompt', this)">📋 ${zh?"複製":"Copy"}</button>
+      </div>
+      <pre id="ai3Prompt">${zh?`你是一個 AI 辯論主持人，呈現兩個對立的策略立場。
+
+【任務】
+針對佃製作所的聯盟決策，生成兩個立場分明、各具內部邏輯的觀點：
+
+【立場 A — 治理設計派】
+- 理論視角：交易成本經濟學（TCE）/ 治理結構設計
+- 核心主張：正式合約、治理結構、IP 保護機制是首要任務；能力是次要的
+- 字數：90-110 字
+
+【立場 B — 能力培養派】
+- 理論視角：資源基礎觀（RBV）/ 動態能力
+- 核心主張：建立 AMC、發展共同創新（CIA）才是真正驅動速度的關鍵；治理結構過於靜態
+- 字數：90-110 字
+
+【格式要求】
+請嚴格使用以下兩個標題分別呈現：
+「【立場 A — 治理設計派】：」
+「【立場 B — 能力培養派】：」
+
+【用戶問題】
+佃製作所面臨與 Gear Ghost 或帝國重工的農業機械 R&D 合作決策。請生成兩個對立的策略立場分析。
+
+【輸出要求】
+- 繁體中文
+- 每個立場 90-110 字
+- 各自有內部邏輯，立場明確、可辯論`:`You are an AI debate moderator presenting two competing strategic positions.
+
+[TASK]
+For Tsukuda's alliance decision, generate two sharply contrasting positions with internal logic:
+
+[POSITION A — Governance Design]
+- Theoretical lens: Transaction Cost Economics (TCE) / governance structure design
+- Core claim: formal contracts, governance structures, IP protection are paramount; capabilities are secondary
+- Length: 90-110 words
+
+[POSITION B — Capability Building]
+- Theoretical lens: Resource-Based View (RBV) / dynamic capabilities
+- Core claim: building AMC and developing co-innovation (CIA) is what truly drives speed; governance structures are too static
+- Length: 90-110 words
+
+[FORMAT REQUIREMENT]
+Use exactly these two headers:
+"[POSITION A — Governance Design]:"
+"[POSITION B — Capability Building]:"
+
+[USER QUESTION]
+Tsukuda Factory must decide between Gear Ghost and Teikoku Heavy Industries for an agricultural machinery R&D alliance. Generate two opposing strategic positions.
+
+[OUTPUT REQUIREMENTS]
+- English
+- 90-110 words each
+- Each with internal logic; clear, debatable positions`}</pre>
+    </div>
+
+    <!-- Paste AI response -->
+    <div style="margin-top:12px;">
+      <p class="sm" style="font-weight:800;margin-bottom:6px;">📥 ${zh?"貼上 AI 給你的兩個立場辯論：":"Paste AI's two-position debate:"}</p>
+      <textarea id="ai3Response" class="responseInput" placeholder="${zh?'把 AI 給你的兩個立場辯論完整貼到這裡...':'Paste AI&apos;s two-position debate here...'}" oninput="updateWC('ai3Response','ai3ResponseWC')"></textarea>
+      <div id="ai3ResponseWC" class="wc">0 字</div>
+    </div>
+
+    <!-- Student evaluation -->
+    <div style="margin-top:12px;">
+      <p class="sm" style="font-weight:800;margin-bottom:6px;">✏️ ${zh?"你的評估（請分別說明兩個立場的優缺點，以及如何整合）：":"Your evaluation (discuss strengths/weaknesses of each position, and how to integrate):"}</p>
+      <textarea id="ai3Critique" class="critiqueInput" placeholder="${zh?'立場 A 的理論依據是... 但忽略了...\n立場 B 的理論依據是... 但忽略了...\n整合兩者的方式是...':'Position A\'s theoretical basis is... but ignores...\nPosition B\'s theoretical basis is... but ignores...\nIntegrating both would involve...'}" rows="6" oninput="updateWC('ai3Critique','ai3WC')"></textarea>
+      <div id="ai3WC" class="wc">0 字</div>
+    </div>
+    ${IS_TEACHER?revealBtn("ai3","📋 教師解說：整合評估指引"):""}
+  </div>
+  ${IS_TEACHER?revealSection("ai3",`
+    <p style="font-weight:900;font-size:13px;margin-bottom:8px;">整合評估指引（Teaching Notes）：</p>
+    <ul style="font-size:13px;padding-left:18px;line-height:1.8;">
+      <li><strong>治理立場（Reuer）的強項</strong>：提供具體可操作的機制設計（JSC、仲裁類型選擇），但無法解釋為何同樣的治理結構下有些合作快有些慢。</li>
+      <li><strong>能力立場（Zahoor）的強項</strong>：解釋了速度差異的機制（AMC→CIA），但未充分考慮在高知識誤用風險下，AMC 是否能夠有效運作。</li>
+      <li><strong>理論整合</strong>：治理結構（Reuer）是 AMC 能夠發揮作用的<em>邊界條件</em>。Zahoor 等人的模型假設了一個相對穩定的合作環境，但 Reuer 提醒我們這個環境本身需要被設計。</li>
+      <li><strong>佃製作所的結論</strong>：先用 Reuer 的框架設計可信賴的治理結構（特別是 IP 保護機制），再用 Zahoor 的 AMC 框架激活協作能力，才能同時達到 IP 保護和速度目標。</li>
+    </ul>
+  `):""}
+
+  ${pollCard({key:"c1_gov",title:"整合分析後：你認為佃製作所最需要哪種治理機制？",title_en:"After analysis: What governance mechanism does Tsukuda need most?",opts:[["a","更強的激勵對齊（股權或 mutual hostages）","Stronger incentive alignment (equity or mutual hostages)"],["b","非股權聯盟 + JSC 行政控制（量身訂製）","Non-equity + JSC admin controls (bespoke design)"],["c","主要是 AMC 能力建立","Primarily AMC capability building"],["d","爭端類型化法律機制設計","Dispute-type-specific legal mechanism design"]],followup:["選 B 的人：你的 JSC 設計中，IP 爭端的決策規則是什麼？","選 C 的人：哪個 AMC 維度對於對抗帝國重工最重要？"],followup_en:["Team B: What decision rule in your JSC governs IP disputes?","Team C: Which AMC dimension matters most for countering Teikoku?"]})}
+
+  <div class="callout" style="background:#ECFDF5;border-left:4px solid #14B8A6;margin-top:18px;">
+    <p class="p" style="font-size:13.5px;"><strong>🔗 ${zh?"從 C1 到 S1：投票結束，現在動筆。":"From C1 to S1: Vote done — now write."}</strong> ${zh?
+    "你剛剛在投票中表達了直覺。但策略 Memo 不能只寫直覺；它必須把直覺翻譯成 Reuer 與 Zahoor 能識別的語彙——具體的機制設計、可被檢驗的因果鏈。S1 的任務是：把你在 T1 的「結構診斷」和 T2 的「能力診斷」整合成一份 150–200 字、可呈遞給佃航平的 Memo。<strong>不要再寫『建立信任』這種抽象建議</strong>——寫具體：JSC 如何運作？IP 爭端走哪條路？AMC 的哪個維度先發展？":
+    "You just expressed an intuition through the vote. But a strategy memo cannot stay at intuition; it must translate that intuition into vocabulary Reuer and Zahoor would recognize — concrete mechanism design and a testable causal chain. S1's task: integrate your T1 'structure diagnosis' with your T2 'capability diagnosis' into a 150–200 word memo deliverable to Tsukuda Kohei. <strong>No more abstractions like 'build trust'</strong> — be specific: How does the JSC run? What's the IP dispute pathway? Which AMC dimension comes first?"}</p>
+  </div>`
+}
+
+function viewS1(){
+  const zh=ST.lang==="zh";
+  const words=countWords(document.getElementById("memoText")?.value||"");
+  return `
+  <div class="sectionHead">
+    <div>
+      <h1 class="h1">${zh?"📝 S1｜策略備忘錄：佃製作所的聯盟治理建議":"📝 S1 | Strategy Memo: Alliance Governance Recommendation for Tsukuda"}</h1>
+      <p class="sub">${zh?"目標：整合 Reuer + Zahoor，提出具體、有理論根據的建議":"Goal: Integrate Reuer + Zahoor to form a specific, theory-grounded recommendation"}</p>
+    </div>
+    <div class="tag">5 min</div>
+  </div>
+  ${timeTags("s1")}
+
+  <div class="callout gold" style="margin-bottom:16px;">
+    <p class="p"><strong>備忘錄任務（Strategy Memo Prompt）：</strong><br/>${zh?
+    "佃製作所正在決定與 Gear Ghost 或帝國重工合作農業機械變速箱研發。請提出一份 Memo，說明你建議的治理結構（包含：激勵機制選擇、行政控制設計、法律制度／爭端解決機制），以及需要培養哪些 AMC 維度才能讓合作有效運作。請整合 Reuer (2024) 和 Zahoor et al. (2023) 至少各一個概念。（150-200字）":
+    "Tsukuda is deciding on R&D collaboration with Gear Ghost or Teikoku for agricultural-machinery transmissions. Write a memo specifying your recommended governance structure (incentive mechanism, administrative controls, supporting legal institutions / dispute-resolution design) and which AMC dimensions to develop for effective collaboration. Integrate at least one concept each from Reuer (2024) and Zahoor et al. (2023). (150-200 words)"}</p>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <p class="cardTitle">✍️ ${zh?"Memo 四層結構提示":"Memo Four-Layer Structure Guide"}</p>
+    <div class="tbl" style="margin-bottom:10px;">
+      <table class="tbl" style="font-size:13px;">
+        <thead><tr><th>層次</th><th>問題</th><th>關鍵概念</th></tr></thead>
+        <tbody>
+          <tr><td><strong>問題定義</strong></td><td>佃面臨的具體 IP 保護 vs. 速度困境是？</td><td>Asset specificity, misappropriation risk</td></tr>
+          <tr><td><strong>框架分析</strong></td><td>Reuer 三機制各自如何應用？</td><td>Incentives / Admin Controls / Supporting legal institutions</td></tr>
+          <tr><td><strong>選項比較</strong></td><td>Gear Ghost vs. Teikoku，各需要什麼結構？</td><td>Bespoke governance, JSC, CIA</td></tr>
+          <tr><td><strong>建議與理由</strong></td><td>你的建議是？AMC 的哪個維度最關鍵？</td><td>AMC → CIA → Post-entry speed</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <textarea id="memoText" class="critiqueInput" rows="8" placeholder="${zh?'TO: 佃製作所經營團隊\nFROM: 策略顧問\nSUBJECT: 農業機械 R&D 聯盟治理建議\n\n問題：...\n分析：...\n選項：...\n建議：...':'TO: Tsukuda Factory Management Team\nFROM: Strategy Consultant\nSUBJECT: Agricultural Machinery R&D Alliance Governance Recommendation\n\nProblem: ...\nAnalysis: ...\nOptions: ...\nRecommendation: ...'}" oninput="updateWC('memoText','memoWC')"></textarea>
+    <div id="memoWC" class="wc">0 字 / Words</div>
+  </div>
+
+  ${IS_TEACHER?revealBtn("s1note","📋 教師引導：Memo 評分指引（先讀 Memo 再展開）"):""}
+  ${IS_TEACHER?revealSection("s1note",`
+    <p style="font-weight:900;font-size:13px;color:#92400E;margin:0 0 8px;">📋 TEACHER NOTE — Memo 評分指引</p>
+    <p style="font-size:12px;color:#92400E;margin:0 0 8px;font-style:italic;">建議使用流程：先讓學生寫完 Memo（5–7 分鐘），抽 2–3 份匿名朗讀後再展開此評分標準對照。</p>
+    <div class="tbl" style="margin-top:8px;">
+      <table class="tbl" style="font-size:12px;">
+        <thead><tr><th>評分標準</th><th>優秀（A）</th><th>普通（B/C）</th><th>需改進</th></tr></thead>
+        <tbody>
+          <tr><td><strong>理論整合</strong></td><td>明確引用並整合 Reuer 三機制 + Zahoor AMC→CIA 中介路徑</td><td>提到兩篇文章，但連結不清楚</td><td>只有直覺建議，無理論支持</td></tr>
+          <tr><td><strong>具體性</strong></td><td>提出具體機制設計（如：JSC 決策規則、IP 爭端仲裁條款）</td><td>有方向但不具體</td><td>抽象建議（「建立信任」等）</td></tr>
+          <tr><td><strong>問題意識</strong></td><td>識別競合脈絡（Teikoku 情況）的特殊性</td><td>一般性討論</td><td>沒有區分兩個夥伴的差異</td></tr>
+          <tr><td><strong>因果邏輯</strong></td><td>AMC 需透過 CIA 才能影響速度（中介邏輯清楚）</td><td>提到 AMC，但忘記 CIA 的角色</td><td>說 AMC 直接等於速度（誤用）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;margin-top:8px;"><strong>優秀答案的核心論點</strong>：建議與 Gear Ghost 簽訂雙邊非股權協議（bilateral non-equity），在合約中嵌入 JSC（行政控制），IP 爭端保留訴訟選項（法律機制）。同時集中培養 AMC 的「組織間協調」和「學習」維度，以驅動激進 × 漸進共同創新，最終加速後進入市場的速度。</p>
+    <p style="font-size:12px;margin-top:8px;color:#92400E;"><strong>與 OpenAI×Microsoft 連結</strong>：可在收尾時提醒——Microsoft 用了 6 年（2019→2025）才從錯誤的治理結構中重新談判出來，付出了 ~2023 年董事會危機的代價；佃製作所沒有那種重新談判的本錢，必須在 ex ante 就設計對。</p>
+  `):""}`;
+}
+
+// ═══ RENDER ENGINE ═══
+function render(){
+  const v=ST.view;
+  let html="";
+  if(v==="s0") html=viewS0();
+  else if(v==="t1") html=viewT1();
+  else if(v==="t2") html=viewT2();
+  else if(v==="c1") html=viewC1();
+  else if(v==="s1") html=viewS1();
+  content.innerHTML=html;
+  bindEvents();
+  restoreRevealStates();
+  // restore saved textareas
+  ["memoText","ai2Critique","ai3Critique","debateInput","ai2Response","ai3Response","gameAIResponse","gameReflect"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&ST[id])el.value=ST[id];
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function bindEvents(){
+  // nav
+  document.querySelectorAll(".navItem").forEach(b=>{
+    b.classList.toggle("active",b.dataset.view===ST.view);
+    b.onclick=()=>{ST.view=b.dataset.view;save();render();};
+  });
+  // polls
+  document.querySelectorAll(".opt[data-poll]").forEach(b=>{
+    b.onclick=()=>{vote(b.dataset.poll,b.dataset.opt);render();};
+  });
+  // quizzes
+  document.querySelectorAll(".opt[data-quiz]").forEach(b=>{
+    b.onclick=()=>{
+      const k=b.dataset.quiz;const i=parseInt(b.dataset.idx);
+      if(!ST.quizDone[k]){ST.quizDone[k]=i+1;save();render();}
+    };
+  });
+  // ═══ Alliance Governance Choice Game ═══
+  document.querySelectorAll(".opt[data-game]").forEach(b=>{
+    const k=b.dataset.game;
+    if(ST.game&&ST.game[k]===b.dataset.val) b.classList.add("chosen");
+    b.onclick=()=>{
+      if(!ST.game)ST.game={};
+      ST.game[k]=b.dataset.val;
+      save();
+      // Refresh visual state on this decision row
+      document.querySelectorAll(`.opt[data-game="${k}"]`).forEach(o=>{
+        o.classList.toggle("chosen",o.dataset.val===b.dataset.val);
+      });
+      updateGameUI();
+    };
+  });
+  updateGameUI();
+  document.getElementById("revealRealityBtn")?.addEventListener("click",()=>{
+    ST.gameRevealed=true;save();
+    const block=document.getElementById("realityRevealBlock");
+    if(block){block.style.display="block";updateGameScore();}
+  });
+  // restore reveal state
+  if(ST.gameRevealed){
+    const block=document.getElementById("realityRevealBlock");
+    if(block){block.style.display="block";updateGameScore();}
+  }
+  // game textareas
+  ["gameAIResponse","gameReflect"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){
+      if(ST[id])el.value=ST[id];
+      el.addEventListener("input",()=>{ST[id]=el.value;save();updateWC(id,id+"WC");});
+      updateWC(id,id+"WC");
+    }
+  });
+  // topbar
+  document.getElementById("btnLang")?.addEventListener("click",()=>{ST.lang=ST.lang==="zh"?"en":"zh";save();render();});
+  document.getElementById("btnReset")?.addEventListener("click",()=>{if(confirm("Reset all progress?")){{localStorage.removeItem(STORE);ST={...DEF};render();}}});
+  // wc on textareas
+  ["memoText","ai2Critique","ai3Critique","debateInput","ai2Response","ai3Response"].forEach(id=>{
+    const el=document.getElementById(id);
+    const wcId=id==="memoText"?"memoWC":id.replace("Critique","WC").replace("Input","WC");
+    if(el){
+      updateWC(id,wcId);
+      el.addEventListener("input",()=>{ST[id]=el.value;save();updateWC(id,wcId);});
+    }
+  });
+}
+
+// Update UI for game (status, AI block visibility, prompt)
+function updateGameUI(){
+  const g=ST.game||{};
+  const status=document.getElementById("gameChoiceStatus");
+  if(!status)return;
+  const zh=ST.lang==="zh";
+  const made=["d1","d2","d3"].filter(k=>g[k]).length;
+  status.textContent=zh?
+    `已完成 ${made}/3 項決策 ${made===3?"✓ 可以進入 AI 設計階段":"（請完成所有 3 項決策）"}`:
+    `${made}/3 decisions made ${made===3?"✓ Ready for AI co-design":"(complete all 3 to proceed)"}`;
+
+  const aiBlock=document.getElementById("gameAIBlock");
+  if(aiBlock){
+    aiBlock.style.display=made===3?"block":"none";
+    if(made===3) buildGamePrompt();
+  }
+}
+
+// Build dynamic prompt based on student's choices
+function buildGamePrompt(){
+  const g=ST.game||{};
+  const zh=ST.lang==="zh";
+  const labels={
+    d1:{a:zh?"直接收購（Microsoft 全資買下 OpenAI）":"Direct acquisition",b:zh?"資本上限合夥（capped-profit LP）+ 獨家授權":"Capped-profit LP + exclusive license",c:zh?"量身訂製：非股權聯盟 + 明確 IP 邊界 + 階段式股權":"Bespoke: non-equity alliance + explicit IP boundaries + milestone-based equity"},
+    d2:{a:zh?"無正式席位、無 JSC":"No formal seat, no JSC",b:zh?"一席無投票權觀察員 + 雙公司 JSC（每月）":"One non-voting observer + bilateral JSC (monthly)",c:zh?"多數投票席位":"Voting majority"},
+    d3:{a:zh?"AGI 由 OpenAI 董事會單方判定 + 純訴訟":"AGI judged unilaterally by OpenAI board + litigation only",b:zh?"AGI = 外部仲裁人 + 營收測試 + 分層爭端解決":"AGI = external arbiter + revenue test + tiered dispute resolution",c:zh?"完全不設 AGI 條款":"Drop AGI clause entirely"}
+  };
+  const text=zh?
+`你是一位精通 Reuer (2024) 與 Keller et al. (2021) 框架的聯盟治理顧問。
+
+【情境】
+時間：2019 年 7 月
+雙方：OpenAI（非營利 AI 研究實驗室）+ Microsoft（雲端與生產力軟體巨頭）
+Microsoft 投入 $1B（後續預計累計到 $13B）。OpenAI 急需 GPU 算力以訓練前沿模型。雙方都不希望被對方壟斷或併吞。
+
+【用戶（顧問）的設計選擇】
+• Reuer 激勵機制（D1）：${labels.d1[g.d1]||"未選"}
+• Reuer 行政控制（D2）：${labels.d2[g.d2]||"未選"}
+• Reuer 法律機制（D3）：${labels.d3[g.d3]||"未選"}
+
+【任務】
+1. 用 Reuer 的三大機制（incentives / admin controls / legal institutions）診斷上述設計組合的優點與盲點。
+2. 套用 Keller et al. (2021) 的 2×2 類型學，標出此設計屬於哪個格子，並指出最大的『中斷』脆弱性（disruption vulnerability）。
+3. 給出 3-5 條具體的合約條款建議，補強上述設計（例如：JSC 開會頻率、IP 邊界子句、爭端分流規則、股權轉換觸發條件）。
+4. 預測：若 5 年後 OpenAI 的 CEO 突然被解雇（假想中斷情境），上述設計能否承受？
+
+【輸出要求】
+- 繁體中文
+- 約 350-450 字
+- 條理分明，先診斷後建議`:
+`You are an alliance-governance consultant fluent in Reuer (2024) and Keller et al. (2021).
+
+[CONTEXT]
+Time: July 2019
+Parties: OpenAI (nonprofit AI research lab) + Microsoft (cloud & productivity software giant)
+Microsoft is investing $1B (expected to grow to $13B). OpenAI desperately needs GPU compute to train frontier models. Neither party wants to be absorbed or monopolized.
+
+[USER'S DESIGN CHOICES]
+• Reuer Incentives (D1): ${labels.d1[g.d1]||"not chosen"}
+• Reuer Admin Controls (D2): ${labels.d2[g.d2]||"not chosen"}
+• Reuer Legal Institutions (D3): ${labels.d3[g.d3]||"not chosen"}
+
+[TASK]
+1. Use Reuer's three mechanisms (incentives / admin controls / legal institutions) to diagnose strengths and blind spots of this design.
+2. Apply Keller et al. (2021)'s 2×2 typology — identify which cell this design occupies and flag the biggest 'disruption vulnerability'.
+3. Propose 3-5 concrete contract terms to strengthen the design (e.g., JSC meeting cadence, IP boundary clauses, dispute-routing rules, equity-conversion triggers).
+4. Predict: if 5 years later OpenAI's CEO is abruptly fired (hypothetical disruption), would this design survive?
+
+[OUTPUT]
+- English
+- ~350-450 words
+- Diagnose first, then recommend`;
+  const el=document.getElementById("gamePrompt");
+  if(el)el.textContent=text;
+}
+
+function updateGameScore(){
+  const g=ST.game||{};
+  // Reuer-aligned answers: D1=C, D2=B, D3=B
+  let score=0;
+  if(g.d1==="c")score++;
+  if(g.d2==="b")score++;
+  if(g.d3==="b")score++;
+  const total=3;
+  const zh=ST.lang==="zh";
+  const verdicts=[
+    zh?"⚠️ 你完全走了 OpenAI 2019 的舊路。事後得花 $13B 才修補。":"⚠️ You took OpenAI's exact 2019 path. It cost $13B to patch.",
+    zh?"⚠️ 你做了一些 Reuer-aligned 選擇，但仍會在 2023 危機中暴露。":"⚠️ Some Reuer-aligned choices, but still exposed in the 2023 crisis.",
+    zh?"👍 你的設計接近 2026 年才被學到的版本。":"👍 Your design approaches what was only learned by 2026.",
+    zh?"🏆 滿分！你預先設計了 OpenAI/Microsoft 用 7 年才掙來的治理結構。":"🏆 Perfect score! You pre-designed what OpenAI/Microsoft took 7 years to learn."
+  ];
+  const el=document.getElementById("gameScoreText");
+  if(el)el.textContent=`${score}/${total} — ${verdicts[score]}`;
+}
+
+function updateWC(inputId,wcId){
+  const el=document.getElementById(inputId);
+  const wc=document.getElementById(wcId);
+  if(!el||!wc)return;
+  const n=countWords(el.value);
+  const targets={memoText:200,ai2Critique:100,ai3Critique:150,debateInput:120,ai2Response:100,ai3Response:100,gameAIResponse:300,gameReflect:120};
+  const t=targets[inputId]||150;
+  wc.textContent=`${n} 字 / ${t} 目標`;
+  wc.style.color=n>=t?"#15803d":n>t*0.5?"#B45309":"var(--muted)";
+}
+
+function restoreRevealStates(){
+  if(!ST.reveals)return;
+  Object.keys(ST.reveals).forEach(id=>{
+    const el=document.getElementById(id+"Rev");
+    if(el&&ST.reveals[id])el.classList.add("visible");
+  });
+}
+
+// (AI Exercise functions removed — replaced with copy-prompt UI in viewT1/T2/C1)
+
+// keyboard navigation
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="TEXTAREA"||e.target.tagName==="INPUT") return;
+  const i=VIEW_ORDER.indexOf(ST.view);
+  if(e.key==="ArrowRight"||e.key==="]") {if(i<VIEW_ORDER.length-1){ST.view=VIEW_ORDER[i+1];save();render();}}
+  if(e.key==="ArrowLeft"||e.key==="[") {if(i>0){ST.view=VIEW_ORDER[i-1];save();render();}}
+  if(e.key==="l"||e.key==="L"){ST.lang=ST.lang==="zh"?"en":"zh";save();render();}
+  if(e.key==="r"||e.key==="R"){if(confirm("Reset?")){{localStorage.removeItem(STORE);ST={...DEF};render();}}}
+});
+
+render();
+</script>
+</body>
+</html>
